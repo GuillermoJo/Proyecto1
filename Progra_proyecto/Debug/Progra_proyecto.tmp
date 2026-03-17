@@ -1,0 +1,158 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Users\Guillermo\Programas\Microchip Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\Debug\Progra_proyecto.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Progra_proyecto.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Progra_proyecto.map</FILE>
+  <FILE>Progra_proyecto.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <hour><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>45</LINE></hour>
+  <minute><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>46</LINE></minute>
+  <second><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>47</LINE></second>
+  <day><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>50</LINE></day>
+  <month><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>51</LINE></month>
+  <alarm_hour><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>54</LINE></alarm_hour>
+  <alarm_min><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>55</LINE></alarm_min>
+  <current_view><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>58</LINE></current_view>
+  <edit_mode><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>59</LINE></edit_mode>
+  <blink_flag><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>62</LINE></blink_flag>
+  <ms_count_l><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>63</LINE></ms_count_l>
+  <ms_count_h><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>64</LINE></ms_count_h>
+  <halfsec_l><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>65</LINE></halfsec_l>
+  <halfsec_h><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>66</LINE></halfsec_h>
+  <scan_idx><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>69</LINE></scan_idx>
+  <disp0><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>70</LINE></disp0>
+  <disp1><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>71</LINE></disp1>
+  <disp2><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>72</LINE></disp2>
+  <disp3><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>73</LINE></disp3>
+  <btn_locks><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>78</LINE></btn_locks>
+  <btn_events><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>79</LINE></btn_events>
+  <alarm_ringing><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>84</LINE></alarm_ringing>
+  <alarm_latched><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>85</LINE></alarm_latched>
+  <colon_on><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>88</LINE></colon_on>
+  <aux_led><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>89</LINE></aux_led>
+  <RESET><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>157</LINE></RESET>
+  <ISR_PCINT1><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>336</LINE></ISR_PCINT1>
+  <ISR_TIMER0_COMPA><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>255</LINE></ISR_TIMER0_COMPA>
+  <SEG_TABLE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>152</LINE></SEG_TABLE>
+  <MAIN_LOOP><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>248</LINE></MAIN_LOOP>
+  <PROCESS_BUTTON_EVENTS><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>411</LINE></PROCESS_BUTTON_EVENTS>
+  <UPDATE_UI_STATE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>541</LINE></UPDATE_UI_STATE>
+  <BUILD_DISPLAY_BUFFER><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>585</LINE></BUILD_DISPLAY_BUFFER>
+  <T0_SKIP_500><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>294</LINE></T0_SKIP_500>
+  <T0_SKIP_1S><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>315</LINE></T0_SKIP_1S>
+  <CLOCK_TICK_1S><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>818</LINE></CLOCK_TICK_1S>
+  <MUX_REFRESH><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>728</LINE></MUX_REFRESH>
+  <PC0_PRESSED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>356</LINE></PC0_PRESSED>
+  <PC0_RELEASED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>350</LINE></PC0_RELEASED>
+  <CHECK_PC1><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>359</LINE></CHECK_PC1>
+  <PC1_PRESSED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>369</LINE></PC1_PRESSED>
+  <PC1_RELEASED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>363</LINE></PC1_RELEASED>
+  <CHECK_PC2><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>372</LINE></CHECK_PC2>
+  <PC2_PRESSED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>382</LINE></PC2_PRESSED>
+  <PC2_RELEASED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>376</LINE></PC2_RELEASED>
+  <CHECK_PC3><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>385</LINE></CHECK_PC3>
+  <PC3_PRESSED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>395</LINE></PC3_PRESSED>
+  <PC3_RELEASED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>389</LINE></PC3_RELEASED>
+  <ISR_PC1_END><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>398</LINE></ISR_PC1_END>
+  <PBE_GO><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>420</LINE></PBE_GO>
+  <PBE_END><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>533</LINE></PBE_END>
+  <PBE_CHECK_VIEW><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>491</LINE></PBE_CHECK_VIEW>
+  <PBE_MODE_NEXT><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>437</LINE></PBE_MODE_NEXT>
+  <PBE_MODE_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>444</LINE></PBE_MODE_OK>
+  <PBE_MODE_CHK1><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>454</LINE></PBE_MODE_CHK1>
+  <PBE_MODE_CHK2><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>461</LINE></PBE_MODE_CHK2>
+  <PBE_MODE_CHK3><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>468</LINE></PBE_MODE_CHK3>
+  <PBE_MODE_CHK4><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>475</LINE></PBE_MODE_CHK4>
+  <PBE_MODE_CHK5><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>482</LINE></PBE_MODE_CHK5>
+  <PBE_CHECK_UP><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>513</LINE></PBE_CHECK_UP>
+  <PBE_VIEW_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>508</LINE></PBE_VIEW_OK>
+  <PBE_CHECK_DOWN><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>524</LINE></PBE_CHECK_DOWN>
+  <INCREMENT_ACTIVE_FIELD><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>918</LINE></INCREMENT_ACTIVE_FIELD>
+  <DECREMENT_ACTIVE_FIELD><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1017</LINE></DECREMENT_ACTIVE_FIELD>
+  <UI_NOT_DATE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>553</LINE></UI_NOT_DATE>
+  <UI_AUX><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>557</LINE></UI_AUX>
+  <UI_AUX_ON><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>573</LINE></UI_AUX_ON>
+  <UI_AUX_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>576</LINE></UI_AUX_STORE>
+  <BDB_CHK_DATE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>607</LINE></BDB_CHK_DATE>
+  <BDB_SPLIT_PAIR><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>618</LINE></BDB_SPLIT_PAIR>
+  <BDB_ALARM><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>614</LINE></BDB_ALARM>
+  <SPLIT_DECIMAL><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>697</LINE></SPLIT_DECIMAL>
+  <BDB_CONVERT><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>662</LINE></BDB_CONVERT>
+  <BDB_BLANK_LEFT><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>652</LINE></BDB_BLANK_LEFT>
+  <BDB_BLANK_RIGHT><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>658</LINE></BDB_BLANK_RIGHT>
+  <DIGIT_TO_SEG><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>713</LINE></DIGIT_TO_SEG>
+  <SPLIT_LOOP><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>700</LINE></SPLIT_LOOP>
+  <SPLIT_DONE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>706</LINE></SPLIT_DONE>
+  <MUX_CHK1><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>744</LINE></MUX_CHK1>
+  <MUX_OUTPUT><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>762</LINE></MUX_OUTPUT>
+  <MUX_CHK2><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>751</LINE></MUX_CHK2>
+  <MUX_CHK3><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>758</LINE></MUX_CHK3>
+  <MUX_NO_COLON><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>772</LINE></MUX_NO_COLON>
+  <MUX_NO_AUX><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>791</LINE></MUX_NO_AUX>
+  <MUX_NO_BUZZ><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>797</LINE></MUX_NO_BUZZ>
+  <MUX_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>806</LINE></MUX_STORE>
+  <CT_STORE_SEC><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>861</LINE></CT_STORE_SEC>
+  <CT_STORE_MIN><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>857</LINE></CT_STORE_MIN>
+  <CT_STORE_HOUR><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>853</LINE></CT_STORE_HOUR>
+  <INCREMENT_DAY_ROLLOVER><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1128</LINE></INCREMENT_DAY_ROLLOVER>
+  <CT_ALARM_CHECK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>864</LINE></CT_ALARM_CHECK>
+  <CT_CLEAR_IF_NEEDED><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>892</LINE></CT_CLEAR_IF_NEEDED>
+  <CT_END><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>910</LINE></CT_END>
+  <CT_CLEAR_LATCH><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>906</LINE></CT_CLEAR_LATCH>
+  <IAF_CHK_MIN><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>937</LINE></IAF_CHK_MIN>
+  <IAF_H_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>932</LINE></IAF_H_OK>
+  <IAF_END><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1010</LINE></IAF_END>
+  <IAF_CHK_DAY><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>952</LINE></IAF_CHK_DAY>
+  <IAF_M_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>945</LINE></IAF_M_OK>
+  <IAF_CHK_MON><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>967</LINE></IAF_CHK_MON>
+  <GET_MONTH_MAXDAY><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1163</LINE></GET_MONTH_MAXDAY>
+  <IAF_D_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>962</LINE></IAF_D_OK>
+  <IAF_CHK_AH><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>986</LINE></IAF_CHK_AH>
+  <IAF_MON_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>975</LINE></IAF_MON_OK>
+  <IAF_CHK_AM><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>999</LINE></IAF_CHK_AM>
+  <IAF_AH_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>994</LINE></IAF_AH_OK>
+  <IAF_AM_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1007</LINE></IAF_AM_OK>
+  <DAF_CHK_MIN><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1038</LINE></DAF_CHK_MIN>
+  <DAF_H_DEC><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1031</LINE></DAF_H_DEC>
+  <DAF_H_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1033</LINE></DAF_H_STORE>
+  <DAF_END><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1120</LINE></DAF_END>
+  <DAF_CHK_DAY><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1055</LINE></DAF_CHK_DAY>
+  <DAF_M_DEC><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1046</LINE></DAF_M_DEC>
+  <DAF_M_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1048</LINE></DAF_M_STORE>
+  <DAF_CHK_MON><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1071</LINE></DAF_CHK_MON>
+  <DAF_D_DEC><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1064</LINE></DAF_D_DEC>
+  <DAF_D_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1066</LINE></DAF_D_STORE>
+  <DAF_CHK_AH><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1092</LINE></DAF_CHK_AH>
+  <DAF_MON_DEC><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1079</LINE></DAF_MON_DEC>
+  <DAF_MON_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1081</LINE></DAF_MON_STORE>
+  <DAF_CHK_AM><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1107</LINE></DAF_CHK_AM>
+  <DAF_AH_DEC><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1100</LINE></DAF_AH_DEC>
+  <DAF_AH_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1102</LINE></DAF_AH_STORE>
+  <DAF_AM_DEC><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1115</LINE></DAF_AM_DEC>
+  <DAF_AM_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1117</LINE></DAF_AM_STORE>
+  <IDR_STORE><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1153</LINE></IDR_STORE>
+  <IDR_MON_OK><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1149</LINE></IDR_MON_OK>
+  <IDR_END><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1156</LINE></IDR_END>
+  <GMD_FEB><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1185</LINE></GMD_FEB>
+  <GMD_30><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1189</LINE></GMD_30>
+  <GMD_END><FILE>C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm</FILE><LINE>1192</LINE></GMD_END>
+ </LABELS>
+</ASSEMBLER_INFO>
