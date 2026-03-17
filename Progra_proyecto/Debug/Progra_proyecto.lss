@@ -1,0 +1,7 @@
+
+AVRASM ver. 2.2.8  C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Progra\Proyecto\Progra_proyecto\Progra_proyecto\main.asm Tue Mar 03 15:29:56 2026
+
+[builtin](2): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
+C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Progra\Proyecto\Progra_proyecto\Progra_proyecto\main.asm(1): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc'
+C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Progra\Proyecto\Progra_proyecto\Progra_proyecto\main.asm(50): error: Use of undefined or forward referenced symbol 'PCINT1addr' in .org
+C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Progra\Proyecto\Progra_proyecto\Progra_proyecto\main.asm(147): error: Invalid directive: '.db_done'
