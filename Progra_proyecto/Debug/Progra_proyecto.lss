@@ -1,12 +1,12 @@
 
-AVRASM ver. 2.2.8  C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm Tue Mar 17 13:25:31 2026
+AVRASM ver. 2.2.8  C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm Tue Mar 17 15:28:59 2026
 
 [builtin](2): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
-C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm(6): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc'
+C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm(1): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc'
 [builtin](2): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
-C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm(6): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc'
+C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proyecto1\Progra_proyecto\main.asm(1): Including file 'C:/Users\Guillermo\Programas\Microchip Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc'
                                  
-                                 ;========================================================
+                                 .include "m328pdef.inc"
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
                                  ;*************************************************************************
@@ -987,11 +987,6 @@ C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proye
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ; Reloj + Fecha + Alarma
-                                 ; ATmega328P - AVR Assembler
-                                 ;========================================================
-                                 
-                                 .include "m328pdef.inc"
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
                                  ;*************************************************************************
@@ -1036,1188 +1031,1126 @@ C:\Users\Guillermo\UVG\Año 3 S1\Progra de micros\Proyeto 1\Progra_proyecto\Proye
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ;========================================================
-                                 ; Constantes
-                                 ;========================================================
-                                 .equ MODE_NORMAL    = 0
-                                 .equ MODE_SET_HOUR  = 1
-                                 .equ MODE_SET_MIN   = 2
-                                 .equ MODE_SET_DAY   = 3
-                                 .equ MODE_SET_MON   = 4
-                                 .equ MODE_SET_AH    = 5
-                                 .equ MODE_SET_AM    = 6
+                                 ; modos de operacion del reloj
+                                 .equ MODO_NORMAL   = 0
+                                 .equ MODO_HORA     = 1
+                                 .equ MODO_MINUTO   = 2
+                                 .equ MODO_DIA      = 3
+                                 .equ MODO_MES      = 4
+                                 .equ MODO_ALARM_H  = 5
+                                 .equ MODO_ALARM_M  = 6
                                  
-                                 .equ VIEW_TIME      = 0
-                                 .equ VIEW_DATE      = 1
-                                 .equ VIEW_ALARM     = 2
+                                 ; vistas disponibles en pantalla
+                                 .equ VISTA_HORA    = 0
+                                 .equ VISTA_FECHA   = 1
+                                 .equ VISTA_ALARMA  = 2
                                  
-                                 .equ BTN_VIEW_BIT   = 0
-                                 .equ BTN_UP_BIT     = 1
-                                 .equ BTN_DOWN_BIT   = 2
-                                 .equ BTN_MODE_BIT   = 3
+                                 ; posiciones de bit de cada boton en los registros de estado
+                                 .equ BIT_BTN_VER   = 0
+                                 .equ BIT_BTN_SUB   = 1
+                                 .equ BIT_BTN_BAJ   = 2
+                                 .equ BIT_BTN_MOD   = 3
                                  
-                                 .equ BLANK_CODE     = 10
+                                 ; codigo especial para apagar todos los segmentos de un digito
+                                 .equ COD_VACIO     = 10
                                  
-                                 ;========================================================
-                                 ; SRAM
-                                 ;========================================================
+                                 ; registros de trabajo temporales
+                                 .def tmp0  = r16
+                                 .def tmp1  = r17
+                                 .def tmp2  = r18
+                                 .def tmp3  = r19
+                                 .def tmp4  = r20
+                                 
                                  .dseg
-000100                           hour:               .byte 1
-000101                           minute:             .byte 1
-000102                           second:             .byte 1
-000103                           day:                .byte 1
-000104                           month:              .byte 1
                                  
-000105                           alarm_hour:         .byte 1
-000106                           alarm_min:          .byte 1
+                                 ; variables del reloj
+000100                           horas:         .byte 1
+000101                           minutos:       .byte 1
+000102                           segundos:      .byte 1
+000103                           dia:           .byte 1
+000104                           mes:           .byte 1
                                  
-000107                           current_view:       .byte 1
-000108                           edit_mode:          .byte 1
+                                 ; configuracion de la alarma
+000105                           alar_hora:     .byte 1
+000106                           alar_min:      .byte 1
                                  
-000109                           blink_flag:         .byte 1
-00010a                           ms_count_l:         .byte 1
-00010b                           ms_count_h:         .byte 1
-00010c                           halfsec_l:          .byte 1
-00010d                           halfsec_h:          .byte 1
+                                 ; estado general de la interfaz
+000107                           vista_actual:  .byte 1
+000108                           modo_edicion:  .byte 1
                                  
-00010e                           scan_idx:           .byte 1
+                                 ; variables de temporizacion y parpadeo
+000109                           flag_parpadeo: .byte 1
+00010a                           cnt_ms_l:      .byte 1
+00010b                           cnt_ms_h:      .byte 1
+00010c                           cnt_500_l:     .byte 1
+00010d                           cnt_500_h:     .byte 1
                                  
-00010f                           disp0:              .byte 1
-000110                           disp1:              .byte 1
-000111                           disp2:              .byte 1
-000112                           disp3:              .byte 1
+                                 ; indice del digito que se refresca en el multiplex
+00010e                           indice_mux:    .byte 1
                                  
-000113                           btn_locks:          .byte 1
-000114                           btn_events:         .byte 1
+                                 ; patrones de segmento para cada digito del display
+00010f                           seg_d0:        .byte 1
+000110                           seg_d1:        .byte 1
+000111                           seg_d2:        .byte 1
+000112                           seg_d3:        .byte 1
                                  
-000115                           alarm_ringing:      .byte 1
-000116                           alarm_latched:      .byte 1
+                                 ; registros de eventos y bloqueos de botones
+000113                           bloqueos:      .byte 1
+000114                           eventos:       .byte 1
                                  
-000117                           colon_on:           .byte 1
-000118                           aux_led:            .byte 1
+                                 ; estado de la alarma
+000115                           alarma_sonando:  .byte 1
+000116                           alarma_usada:    .byte 1
+                                 
+                                 ; control del LED de dos puntos y del LED indicador
+000117                           puntos_on:     .byte 1
+000118                           led_alarma:    .byte 1
                                  
                                  .cseg
                                  
-                                 ;========================================================
-                                 ; Vectores de interrupción
-                                 ;========================================================
+                                 ; solo se usan los vectores de PCINT1 y TIMER0 COMPA
                                  .org 0x0000
-000000 c038                          rjmp RESET
+000000 c022                          rjmp INICIO
                                  
-                                 .org 0x0002
-000002 9518                          reti
-                                 .org 0x0004
-000004 9518                          reti
-                                 .org 0x0006
-000006 9518                          reti
                                  .org 0x0008
-000008 c0d5                          rjmp ISR_PCINT1
-                                 .org 0x000A
-00000a 9518                          reti
-                                 .org 0x000C
-00000c 9518                          reti
-                                 .org 0x000E
-00000e 9518                          reti
-                                 .org 0x0010
-000010 9518                          reti
-                                 .org 0x0012
-000012 9518                          reti
-                                 .org 0x0014
-000014 9518                          reti
-                                 .org 0x0016
-000016 9518                          reti
-                                 .org 0x0018
-000018 9518                          reti
-                                 .org 0x001A
-00001a 9518                          reti
+000008 c0ba                          rjmp ISR_BOTONES
+                                 
                                  .org 0x001C
-00001c c076                          rjmp ISR_TIMER0_COMPA
-                                 .org 0x001E
-00001e 9518                          reti
-                                 .org 0x0020
-000020 9518                          reti
-                                 .org 0x0022
-000022 9518                          reti
-                                 .org 0x0024
-000024 9518                          reti
-                                 .org 0x0026
-000026 9518                          reti
-                                 .org 0x0028
-000028 9518                          reti
-                                 .org 0x002A
-00002a 9518                          reti
-                                 .org 0x002C
-00002c 9518                          reti
-                                 .org 0x002E
-00002e 9518                          reti
-                                 .org 0x0030
-000030 9518                          reti
-                                 .org 0x0032
-000032 9518                          reti
-                                 
-                                 ;========================================================
-                                 ; Tabla 7 segmentos
-                                 ; bit6..bit0 = A B C D E F G
-                                 ;========================================================
-                                 SEG_TABLE:
-000033 307e
-000034 796d
-000035 5b33
-000036 705f
-000037 7b7f
-000038 0000                          .db 0b1111110, 0b0110000, 0b1101101, 0b1111001, 0b0110011, 0b1011011, 0b1011111, 0b1110000, 0b1111111, 0b1111011, 0b0000000, 0b0000000 ; padding
-                                 
-                                 ;========================================================
-                                 ; RESET
-                                 ;========================================================
-                                 RESET:
-000039 e008                          ldi r16, high(RAMEND)
-00003a bf0e                          out SPH, r16
-00003b ef0f                          ldi r16, low(RAMEND)
-00003c bf0d                          out SPL, r16
-                                 
-00003d 2411                          clr r1
-                                 
-                                     ; Valores iniciales
-00003e e00c                          ldi r16, 12
-00003f 9300 0100                     sts hour, r16
-                                 
-000041 2700                          clr r16
-000042 9300 0101                     sts minute, r16
-000044 9300 0102                     sts second, r16
-                                 
-000046 e001                          ldi r16, 1
-000047 9300 0103                     sts day, r16
-000049 9300 0104                     sts month, r16
-                                 
-00004b e006                          ldi r16, 6
-00004c 9300 0105                     sts alarm_hour, r16
-                                 
-00004e 2700                          clr r16
-00004f 9300 0106                     sts alarm_min, r16
-000051 9300 0107                     sts current_view, r16
-000053 9300 0108                     sts edit_mode, r16
-000055 9300 0109                     sts blink_flag, r16
-000057 9300 010a                     sts ms_count_l, r16
-000059 9300 010b                     sts ms_count_h, r16
-00005b 9300 010c                     sts halfsec_l, r16
-00005d 9300 010d                     sts halfsec_h, r16
-00005f 9300 010e                     sts scan_idx, r16
-000061 9300 0113                     sts btn_locks, r16
-000063 9300 0114                     sts btn_events, r16
-000065 9300 0115                     sts alarm_ringing, r16
-000067 9300 0116                     sts alarm_latched, r16
-000069 9300 0117                     sts colon_on, r16
-00006b 9300 0118                     sts aux_led, r16
-00006d 9300 010f                     sts disp0, r16
-00006f 9300 0110                     sts disp1, r16
-000071 9300 0111                     sts disp2, r16
-000073 9300 0112                     sts disp3, r16
-                                 
-                                     ; PORTB:
-                                     ; PB5 = ":"
-                                     ; PB4..PB0 = segmentos A..E
-000075 e30f                          ldi r16, 0b00111111
-000076 b904                          out DDRB, r16
-                                 
-                                     ; PORTD:
-                                     ; PD7..PD6 = segmentos F,G
-                                     ; PD5..PD2 = multiplexado
-                                     ; PD1..PD0 libres
-000077 ef0c                          ldi r16, 0b11111100
-000078 b90a                          out DDRD, r16
-000079 2700                          clr r16
-00007a b90b                          out PORTD, r16
-                                 
-                                     ; PORTC:
-                                     ; PC0..PC3 = botones entrada
-                                     ; PC4 = LED salida
-                                     ; PC5 = buzzer salida
-00007b e300                          ldi r16, 0b00110000
-00007c b907                          out DDRC, r16
-                                 
-                                     ; pull-up en PC0..PC3
-00007d e00f                          ldi r16, 0b00001111
-00007e b908                          out PORTC, r16
-                                 
-                                     ; Pin Change Interrupt solo en PORTC
-00007f e002                          ldi r16, (1<<PCIE1)
-000080 9300 0068                     sts PCICR, r16
-                                 
-000082 e00f                          ldi r16, (1<<PCINT8)|(1<<PCINT9)|(1<<PCINT10)|(1<<PCINT11)
-000083 9300 006c                     sts PCMSK1, r16
-                                 
-                                     ; Timer0 CTC cada 1 ms
-000085 e002                          ldi r16, (1<<WGM01)
-000086 bd04                          out TCCR0A, r16
-                                 
-000087 e003                          ldi r16, (1<<CS01)|(1<<CS00)
-000088 bd05                          out TCCR0B, r16
-                                 
-000089 ef09                          ldi r16, 249
-00008a bd07                          out OCR0A, r16
-                                 
-00008b e002                          ldi r16, (1<<OCIE0A)
-00008c 9300 006e                     sts TIMSK0, r16
-                                 
-00008e 9478                          sei
-                                 
-                                 MAIN_LOOP:
-00008f d082                          rcall PROCESS_BUTTON_EVENTS
-000090 d0f2                          rcall UPDATE_UI_STATE
-000091 d111                          rcall BUILD_DISPLAY_BUFFER
-000092 cffc                          rjmp MAIN_LOOP
-                                 
-                                 ;========================================================
-                                 ; ISR TIMER0 COMPA - cada 1 ms
-                                 ;========================================================
-                                 ISR_TIMER0_COMPA:
-000093 930f                          push r16
-000094 b70f                          in   r16, SREG
-000095 930f                          push r16
-000096 931f                          push r17
-000097 932f                          push r18
-000098 933f                          push r19
-000099 934f                          push r20
-00009a 935f                          push r21
-00009b 936f                          push r22
-00009c 937f                          push r23
-00009d 938f                          push r24
-00009e 939f                          push r25
-00009f 93ef                          push r30
-0000a0 93ff                          push r31
-                                 
-                                     ; contador de 500 ms
-0000a1 9180 010c                     lds r24, halfsec_l
-0000a3 9190 010d                     lds r25, halfsec_h
-0000a5 9601                          adiw r24, 1
-0000a6 9380 010c                     sts halfsec_l, r24
-0000a8 9390 010d                     sts halfsec_h, r25
-                                 
-0000aa ef04                          ldi r16, low(500)
-0000ab e011                          ldi r17, high(500)
-0000ac 1780                          cp  r24, r16
-0000ad 0791                          cpc r25, r17
-0000ae f459                          brne T0_SKIP_500
-                                 
-0000af 2700                          clr r16
-0000b0 9300 010c                     sts halfsec_l, r16
-0000b2 9300 010d                     sts halfsec_h, r16
-                                 
-0000b4 9100 0109                     lds r16, blink_flag
-0000b6 e011                          ldi r17, 1
-0000b7 2701                          eor r16, r17
-0000b8 9300 0109                     sts blink_flag, r16
-                                 
-                                 T0_SKIP_500:
-                                     ; contador de 1000 ms
-0000ba 9180 010a                     lds r24, ms_count_l
-0000bc 9190 010b                     lds r25, ms_count_h
-0000be 9601                          adiw r24, 1
-0000bf 9380 010a                     sts ms_count_l, r24
-0000c1 9390 010b                     sts ms_count_h, r25
-                                 
-0000c3 ee08                          ldi r16, low(1000)
-0000c4 e013                          ldi r17, high(1000)
-0000c5 1780                          cp  r24, r16
-0000c6 0791                          cpc r25, r17
-0000c7 f431                          brne T0_SKIP_1S
-                                 
-0000c8 2700                          clr r16
-0000c9 9300 010a                     sts ms_count_l, r16
-0000cb 9300 010b                     sts ms_count_h, r16
-                                 
-0000cd d18d                          rcall CLOCK_TICK_1S
-                                 
-                                 T0_SKIP_1S:
-0000ce d145                          rcall MUX_REFRESH
-                                 
-0000cf 91ff                          pop r31
-0000d0 91ef                          pop r30
-0000d1 919f                          pop r25
-0000d2 918f                          pop r24
-0000d3 917f                          pop r23
-0000d4 916f                          pop r22
-0000d5 915f                          pop r21
-0000d6 914f                          pop r20
-0000d7 913f                          pop r19
-0000d8 912f                          pop r18
-0000d9 911f                          pop r17
-0000da 910f                          pop r16
-0000db bf0f                          out SREG, r16
-0000dc 910f                          pop r16
-0000dd 9518                          reti
-                                 
-                                 ;========================================================
-                                 ; ISR PCINT1 para A0..A3
-                                 ; Genera evento al soltar el botón
-                                 ;========================================================
-                                 ISR_PCINT1:
-0000de 930f                          push r16
-0000df b70f                          in   r16, SREG
-0000e0 930f                          push r16
-0000e1 931f                          push r17
-0000e2 932f                          push r18
-                                 
-0000e3 b106                          in  r16, PINC
-0000e4 9110 0113                     lds r17, btn_locks
-0000e6 9120 0114                     lds r18, btn_events
-                                 
-                                     ; PC0 VIEW
-0000e8 ff00                          sbrs r16, 0
-0000e9 c005                          rjmp PC0_PRESSED
-                                 PC0_RELEASED:
-0000ea ff10                          sbrs r17, BTN_VIEW_BIT
-0000eb c004                          rjmp CHECK_PC1
-0000ec 7f1e                          cbr r17, (1<<BTN_VIEW_BIT)
-0000ed 6021                          sbr r18, (1<<BTN_VIEW_BIT)
-0000ee c001                          rjmp CHECK_PC1
-                                 PC0_PRESSED:
-0000ef 6011                          sbr r17, (1<<BTN_VIEW_BIT)
-                                 
-                                 CHECK_PC1:
-                                     ; PC1 UP
-0000f0 ff01                          sbrs r16, 1
-0000f1 c005                          rjmp PC1_PRESSED
-                                 PC1_RELEASED:
-0000f2 ff11                          sbrs r17, BTN_UP_BIT
-0000f3 c004                          rjmp CHECK_PC2
-0000f4 7f1d                          cbr r17, (1<<BTN_UP_BIT)
-0000f5 6022                          sbr r18, (1<<BTN_UP_BIT)
-0000f6 c001                          rjmp CHECK_PC2
-                                 PC1_PRESSED:
-0000f7 6012                          sbr r17, (1<<BTN_UP_BIT)
-                                 
-                                 CHECK_PC2:
-                                     ; PC2 DOWN
-0000f8 ff02                          sbrs r16, 2
-0000f9 c005                          rjmp PC2_PRESSED
-                                 PC2_RELEASED:
-0000fa ff12                          sbrs r17, BTN_DOWN_BIT
-0000fb c004                          rjmp CHECK_PC3
-0000fc 7f1b                          cbr r17, (1<<BTN_DOWN_BIT)
-0000fd 6024                          sbr r18, (1<<BTN_DOWN_BIT)
-0000fe c001                          rjmp CHECK_PC3
-                                 PC2_PRESSED:
-0000ff 6014                          sbr r17, (1<<BTN_DOWN_BIT)
-                                 
-                                 CHECK_PC3:
-                                     ; PC3 MODE
-000100 ff03                          sbrs r16, 3
-000101 c005                          rjmp PC3_PRESSED
-                                 PC3_RELEASED:
-000102 ff13                          sbrs r17, BTN_MODE_BIT
-000103 c004                          rjmp ISR_PC1_END
-000104 7f17                          cbr r17, (1<<BTN_MODE_BIT)
-000105 6028                          sbr r18, (1<<BTN_MODE_BIT)
-000106 c001                          rjmp ISR_PC1_END
-                                 PC3_PRESSED:
-000107 6018                          sbr r17, (1<<BTN_MODE_BIT)
-                                 
-                                 ISR_PC1_END:
-000108 9310 0113                     sts btn_locks, r17
-00010a 9320 0114                     sts btn_events, r18
-                                 
-00010c 912f                          pop r18
-00010d 911f                          pop r17
-00010e 910f                          pop r16
-00010f bf0f                          out SREG, r16
-000110 910f                          pop r16
-000111 9518                          reti
-                                 
-                                 ;========================================================
-                                 ; Procesar eventos de botones
-                                 ;========================================================
-                                 PROCESS_BUTTON_EVENTS:
-000112 930f                          push r16
-000113 931f                          push r17
-                                 
-000114 9100 0114                     lds r16, btn_events
-000116 2300                          tst r16
-000117 f109                          breq PBE_EXIT
-                                 
-                                     ; MODE
-000118 ff03                          sbrs r16, BTN_MODE_BIT
-000119 c005                          rjmp PBE_CHECK_VIEW
-00011a 7f07                          cbr r16, (1<<BTN_MODE_BIT)
-00011b 9300 0114                     sts btn_events, r16
-00011d d01e                          rcall HANDLE_MODE_EVENT
-00011e c01a                          rjmp PBE_EXIT
-                                 
-                                 PBE_CHECK_VIEW:
-00011f 9100 0114                     lds r16, btn_events
-000121 ff00                          sbrs r16, BTN_VIEW_BIT
-000122 c005                          rjmp PBE_CHECK_UP
-000123 7f0e                          cbr r16, (1<<BTN_VIEW_BIT)
-000124 9300 0114                     sts btn_events, r16
-000126 d04d                          rcall HANDLE_VIEW_EVENT
-000127 c011                          rjmp PBE_EXIT
-                                 
-                                 PBE_CHECK_UP:
-000128 9100 0114                     lds r16, btn_events
-00012a ff01                          sbrs r16, BTN_UP_BIT
-00012b c005                          rjmp PBE_CHECK_DOWN
-00012c 7f0d                          cbr r16, (1<<BTN_UP_BIT)
-00012d 9300 0114                     sts btn_events, r16
-00012f d17c                          rcall INCREMENT_ACTIVE_FIELD
-000130 c008                          rjmp PBE_EXIT
-                                 
-                                 PBE_CHECK_DOWN:
-000131 9100 0114                     lds r16, btn_events
-000133 ff02                          sbrs r16, BTN_DOWN_BIT
-000134 c004                          rjmp PBE_EXIT
-000135 7f0b                          cbr r16, (1<<BTN_DOWN_BIT)
-000136 9300 0114                     sts btn_events, r16
-000138 d1ca                          rcall DECREMENT_ACTIVE_FIELD
-                                 
-                                 PBE_EXIT:
-000139 911f                          pop r17
-00013a 910f                          pop r16
-00013b 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Manejo botón MODE
-                                 ;========================================================
-                                 HANDLE_MODE_EVENT:
-00013c 930f                          push r16
-00013d 931f                          push r17
-                                 
-                                     ; si la alarma está sonando, MODE la silencia
-00013e 9100 0115                     lds r16, alarm_ringing
-000140 2300                          tst r16
-000141 f021                          breq HME_NEXT_MODE
-000142 2700                          clr r16
-000143 9300 0115                     sts alarm_ringing, r16
-000145 c02b                          rjmp HME_END
-                                 
-                                 HME_NEXT_MODE:
-000146 9100 0108                     lds r16, edit_mode
-000148 9503                          inc r16
-000149 3007                          cpi r16, 7
-00014a f008                          brlo HME_STORE
-00014b 2700                          clr r16
-                                 
-                                 HME_STORE:
-00014c 9300 0108                     sts edit_mode, r16
-                                 
-00014e 3001                          cpi r16, MODE_SET_HOUR
-00014f f421                          brne HME_CHK1
-000150 e010                          ldi r17, VIEW_TIME
-000151 9310 0107                     sts current_view, r17
-000153 c01d                          rjmp HME_END
-                                 
-                                 HME_CHK1:
-000154 3002                          cpi r16, MODE_SET_MIN
-000155 f421                          brne HME_CHK2
-000156 e010                          ldi r17, VIEW_TIME
-000157 9310 0107                     sts current_view, r17
-000159 c017                          rjmp HME_END
-                                 
-                                 HME_CHK2:
-00015a 3003                          cpi r16, MODE_SET_DAY
-00015b f421                          brne HME_CHK3
-00015c e011                          ldi r17, VIEW_DATE
-00015d 9310 0107                     sts current_view, r17
-00015f c011                          rjmp HME_END
-                                 
-                                 HME_CHK3:
-000160 3004                          cpi r16, MODE_SET_MON
-000161 f421                          brne HME_CHK4
-000162 e011                          ldi r17, VIEW_DATE
-000163 9310 0107                     sts current_view, r17
-000165 c00b                          rjmp HME_END
-                                 
-                                 HME_CHK4:
-000166 3005                          cpi r16, MODE_SET_AH
-000167 f421                          brne HME_CHK5
-000168 e012                          ldi r17, VIEW_ALARM
-000169 9310 0107                     sts current_view, r17
-00016b c005                          rjmp HME_END
-                                 
-                                 HME_CHK5:
-00016c 3006                          cpi r16, MODE_SET_AM
-00016d f419                          brne HME_END
-00016e e012                          ldi r17, VIEW_ALARM
-00016f 9310 0107                     sts current_view, r17
-                                 
-                                 HME_END:
-000171 911f                          pop r17
-000172 910f                          pop r16
-000173 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Manejo botón VIEW
-                                 ;========================================================
-                                 HANDLE_VIEW_EVENT:
-000174 930f                          push r16
-                                 
-                                     ; solo cambia vista en modo normal
-000175 9100 0108                     lds r16, edit_mode
-000177 2300                          tst r16
-000178 f441                          brne HVE_END
-                                 
-000179 9100 0107                     lds r16, current_view
-00017b 9503                          inc r16
-00017c 3003                          cpi r16, 3
-00017d f008                          brlo HVE_STORE
-00017e 2700                          clr r16
-                                 
-                                 HVE_STORE:
-00017f 9300 0107                     sts current_view, r16
-                                 
-                                 HVE_END:
-000181 910f                          pop r16
-000182 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Actualizar LEDs
-                                 ;========================================================
-                                 UPDATE_UI_STATE:
-000183 930f                          push r16
-000184 931f                          push r17
-                                 
-                                     ; ":" en D13
-000185 9100 0107                     lds r16, current_view
-000187 3001                          cpi r16, VIEW_DATE
-000188 f421                          brne UIS_NOT_DATE
-000189 e011                          ldi r17, 1
-00018a 9310 0117                     sts colon_on, r17
-00018c c004                          rjmp UIS_AUX
-                                 
-                                 UIS_NOT_DATE:
-00018d 9110 0109                     lds r17, blink_flag
-00018f 9310 0117                     sts colon_on, r17
-                                 
-                                 UIS_AUX:
-                                     ; A4 encendido en vista alarma o config alarma
-000191 2711                          clr r17
-                                 
-000192 9100 0107                     lds r16, current_view
-000194 3002                          cpi r16, VIEW_ALARM
-000195 f039                          breq UIS_AUX_ON
-                                 
-000196 9100 0108                     lds r16, edit_mode
-000198 3005                          cpi r16, MODE_SET_AH
-000199 f019                          breq UIS_AUX_ON
-00019a 3006                          cpi r16, MODE_SET_AM
-00019b f009                          breq UIS_AUX_ON
-00019c c001                          rjmp UIS_STORE
-                                 
-                                 UIS_AUX_ON:
-00019d e011                          ldi r17, 1
-                                 
-                                 UIS_STORE:
-00019e 9310 0118                     sts aux_led, r17
-                                 
-0001a0 911f                          pop r17
-0001a1 910f                          pop r16
-0001a2 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Construir buffer de display
-                                 ;========================================================
-                                 BUILD_DISPLAY_BUFFER:
-0001a3 930f                          push r16
-0001a4 931f                          push r17
-0001a5 932f                          push r18
-0001a6 933f                          push r19
-0001a7 934f                          push r20
-0001a8 935f                          push r21
-0001a9 938f                          push r24
-0001aa 939f                          push r25
-0001ab 93ef                          push r30
-0001ac 93ff                          push r31
-                                 
-                                     ; r16 = valor izquierdo
-                                     ; r17 = valor derecho
-0001ad 9100 0107                     lds r16, current_view
-0001af 3000                          cpi r16, VIEW_TIME
-0001b0 f429                          brne BDB_CHECK_DATE
-0001b1 9100 0100                     lds r16, hour
-0001b3 9110 0101                     lds r17, minute
-0001b5 c00d                          rjmp BDB_SPLIT_PAIR
-                                 
-                                 BDB_CHECK_DATE:
-0001b6 9120 0107                     lds r18, current_view
-0001b8 3021                          cpi r18, VIEW_DATE
-0001b9 f429                          brne BDB_LOAD_ALARM
-0001ba 9100 0103                     lds r16, day
-0001bc 9110 0104                     lds r17, month
-0001be c004                          rjmp BDB_SPLIT_PAIR
-                                 
-                                 BDB_LOAD_ALARM:
-0001bf 9100 0105                     lds r16, alarm_hour
-0001c1 9110 0106                     lds r17, alarm_min
-                                 
-                                 BDB_SPLIT_PAIR:
-0001c3 2f80                          mov r24, r16
-0001c4 d039                          rcall SPLIT_DECIMAL
-0001c5 2f28                          mov r18, r24
-0001c6 2f39                          mov r19, r25
-                                 
-0001c7 2f81                          mov r24, r17
-0001c8 d035                          rcall SPLIT_DECIMAL
-0001c9 2f48                          mov r20, r24
-0001ca 2f59                          mov r21, r25
-                                 
-                                     ; Parpadeo del campo en edición
-0001cb 9100 0109                     lds r16, blink_flag
-0001cd 2300                          tst r16
-0001ce f4a1                          brne BDB_CONVERT
-                                 
-0001cf 9100 0108                     lds r16, edit_mode
-0001d1 3001                          cpi r16, MODE_SET_HOUR
-0001d2 f059                          breq BDB_BLANK_LEFT
-0001d3 3003                          cpi r16, MODE_SET_DAY
-0001d4 f049                          breq BDB_BLANK_LEFT
-0001d5 3005                          cpi r16, MODE_SET_AH
-0001d6 f039                          breq BDB_BLANK_LEFT
-0001d7 3002                          cpi r16, MODE_SET_MIN
-0001d8 f041                          breq BDB_BLANK_RIGHT
-0001d9 3004                          cpi r16, MODE_SET_MON
-0001da f031                          breq BDB_BLANK_RIGHT
-0001db 3006                          cpi r16, MODE_SET_AM
-0001dc f021                          breq BDB_BLANK_RIGHT
-0001dd c005                          rjmp BDB_CONVERT
-                                 
-                                 BDB_BLANK_LEFT:
-0001de e02a                          ldi r18, BLANK_CODE
-0001df e03a                          ldi r19, BLANK_CODE
-0001e0 c002                          rjmp BDB_CONVERT
-                                 
-                                 BDB_BLANK_RIGHT:
-0001e1 e04a                          ldi r20, BLANK_CODE
-0001e2 e05a                          ldi r21, BLANK_CODE
-                                 
-                                 BDB_CONVERT:
-0001e3 2f82                          mov r24, r18
-0001e4 d025                          rcall DIGIT_TO_SEG
-0001e5 9380 010f                     sts disp0, r24
-                                 
-0001e7 2f83                          mov r24, r19
-0001e8 d021                          rcall DIGIT_TO_SEG
-0001e9 9380 0110                     sts disp1, r24
-                                 
-0001eb 2f84                          mov r24, r20
-0001ec d01d                          rcall DIGIT_TO_SEG
-0001ed 9380 0111                     sts disp2, r24
-                                 
-0001ef 2f85                          mov r24, r21
-0001f0 d019                          rcall DIGIT_TO_SEG
-0001f1 9380 0112                     sts disp3, r24
-                                 
-0001f3 91ff                          pop r31
-0001f4 91ef                          pop r30
-0001f5 919f                          pop r25
-0001f6 918f                          pop r24
-0001f7 915f                          pop r21
-0001f8 914f                          pop r20
-0001f9 913f                          pop r19
-0001fa 912f                          pop r18
-0001fb 911f                          pop r17
-0001fc 910f                          pop r16
-0001fd 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Separar decimal
-                                 ; Entrada: r24 = 0..99
-                                 ; Salida:  r24 = decenas, r25 = unidades
-                                 ;========================================================
-                                 SPLIT_DECIMAL:
-0001fe 930f                          push r16
-0001ff 2700                          clr r16
-000200 2799                          clr r25
-                                 
-                                 SPLIT_LOOP:
-000201 308a                          cpi r24, 10
-000202 f018                          brlo SPLIT_DONE
-000203 508a                          subi r24, 10
-000204 9503                          inc r16
-000205 cffb                          rjmp SPLIT_LOOP
-                                 
-                                 SPLIT_DONE:
-000206 2f98                          mov r25, r24
-000207 2f80                          mov r24, r16
-000208 910f                          pop r16
-000209 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Convertir dígito a segmentos
-                                 ; Entrada: r24 = 0..10
-                                 ; Salida:  r24 = patrón 7 segmentos
-                                 ;========================================================
-                                 DIGIT_TO_SEG:
-00020a 93ff                          push ZH
-00020b 93ef                          push ZL
-00020c e0f0                          ldi ZH, high(SEG_TABLE<<1)
-00020d e6e6                          ldi ZL, low(SEG_TABLE<<1)
-00020e 0fe8                          add ZL, r24
-00020f 1df1                          adc ZH, r1
-000210 9184                          lpm r24, Z
-000211 91ef                          pop ZL
-000212 91ff                          pop ZH
-000213 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Multiplexado
-                                 ; D5 = decenas horas/día
-                                 ; D4 = unidades horas/día
-                                 ; D3 = decenas minutos/mes
-                                 ; D2 = unidades minutos/mes
-                                 ;========================================================
-                                 MUX_REFRESH:
-000214 930f                          push r16
-000215 931f                          push r17
-000216 932f                          push r18
-000217 933f                          push r19
-000218 934f                          push r20
-                                 
-000219 9100 010e                     lds r16, scan_idx
-                                 
-00021b 3000                          cpi r16, 0
-00021c f421                          brne MUX_CHK1
-00021d 9110 010f                     lds r17, disp0
-00021f e220                          ldi r18, (1<<PD5)
-000220 c00f                          rjmp MUX_OUTPUT
-                                 
-                                 MUX_CHK1:
-000221 3001                          cpi r16, 1
-000222 f421                          brne MUX_CHK2
-000223 9110 0110                     lds r17, disp1
-000225 e120                          ldi r18, (1<<PD4)
-000226 c009                          rjmp MUX_OUTPUT
-                                 
-                                 MUX_CHK2:
-000227 3002                          cpi r16, 2
-000228 f421                          brne MUX_CHK3
-000229 9110 0111                     lds r17, disp2
-00022b e028                          ldi r18, (1<<PD3)
-00022c c003                          rjmp MUX_OUTPUT
-                                 
-                                 MUX_CHK3:
-00022d 9110 0112                     lds r17, disp3
-00022f e024                          ldi r18, (1<<PD2)
-                                 
-                                 MUX_OUTPUT:
-                                     ; PORTB = ":" + segmentos A..E
-000230 2f31                          mov r19, r17
-000231 9536                          lsr r19
-000232 9536                          lsr r19
-000233 713f                          andi r19, 0b00011111
-                                 
-000234 9140 0117                     lds r20, colon_on
-000236 2344                          tst r20
-000237 f009                          breq MUX_NO_COLON
-000238 6230                          ori r19, (1<<PB5)
-                                 
-                                 MUX_NO_COLON:
-000239 b935                          out PORTB, r19
-                                 
-                                     ; PORTD = segmentos F/G + dígito activo
-00023a 2733                          clr r19
-00023b fd11                          sbrc r17, 1
-00023c 6830                          ori r19, (1<<PD7)
-00023d fd10                          sbrc r17, 0
-00023e 6430                          ori r19, (1<<PD6)
-00023f 2b32                          or  r19, r18
-000240 b93b                          out PORTD, r19
-                                 
-                                     ; PORTC = pull-ups PC0..PC3 + LED A4 + buzzer A5
-000241 e03f                          ldi r19, 0b00001111
-                                 
-000242 9140 0118                     lds r20, aux_led
-000244 2344                          tst r20
-000245 f009                          breq MUX_NO_AUX
-000246 6130                          ori r19, (1<<PC4)
-                                 
-                                 MUX_NO_AUX:
-000247 9140 0115                     lds r20, alarm_ringing
-000249 2344                          tst r20
-00024a f009                          breq MUX_NO_BUZZ
-00024b 6230                          ori r19, (1<<PC5)
-                                 
-                                 MUX_NO_BUZZ:
-00024c b938                          out PORTC, r19
-                                 
-00024d 9100 010e                     lds r16, scan_idx
-00024f 9503                          inc r16
-000250 3004                          cpi r16, 4
-000251 f008                          brlo MUX_STORE
-000252 2700                          clr r16
-                                 
-                                 MUX_STORE:
-000253 9300 010e                     sts scan_idx, r16
-                                 
-000255 914f                          pop r20
-000256 913f                          pop r19
-000257 912f                          pop r18
-000258 911f                          pop r17
-000259 910f                          pop r16
-00025a 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Tick de 1 segundo
-                                 ;========================================================
-                                 CLOCK_TICK_1S:
-00025b 930f                          push r16
-00025c 931f                          push r17
-                                 
-00025d 9100 0102                     lds r16, second
-00025f 9503                          inc r16
-000260 330c                          cpi r16, 60
-000261 f0d8                          brlo CTS_STORE_SEC
-                                 
-000262 2700                          clr r16
-000263 9300 0102                     sts second, r16
-                                 
-000265 9100 0101                     lds r16, minute
-000267 9503                          inc r16
-000268 330c                          cpi r16, 60
-000269 f080                          brlo CTS_STORE_MIN
-                                 
-00026a 2700                          clr r16
-00026b 9300 0101                     sts minute, r16
-                                 
-00026d 9100 0100                     lds r16, hour
-00026f 9503                          inc r16
-000270 3108                          cpi r16, 24
-000271 f028                          brlo CTS_STORE_HOUR
-                                 
-000272 2700                          clr r16
-000273 9300 0100                     sts hour, r16
-000275 d0e9                          rcall INCREMENT_DAY_ROLLOVER
-000276 c008                          rjmp CTS_ALARM_CHECK
-                                 
-                                 CTS_STORE_HOUR:
-000277 9300 0100                     sts hour, r16
-000279 c005                          rjmp CTS_ALARM_CHECK
-                                 
-                                 CTS_STORE_MIN:
-00027a 9300 0101                     sts minute, r16
-00027c c002                          rjmp CTS_ALARM_CHECK
-                                 
-                                 CTS_STORE_SEC:
-00027d 9300 0102                     sts second, r16
-                                 
-                                 CTS_ALARM_CHECK:
-                                     ; activar solo al inicio del minuto exacto
-00027f 9100 0102                     lds r16, second
-000281 2300                          tst r16
-000282 f4b1                          brne CTS_CLEAR_IF_NEEDED
-                                 
-000283 9100 0100                     lds r16, hour
-000285 9110 0105                     lds r17, alarm_hour
-000287 1701                          cp  r16, r17
-000288 f481                          brne CTS_CLEAR_IF_NEEDED
-                                 
-000289 9100 0101                     lds r16, minute
-00028b 9110 0106                     lds r17, alarm_min
-00028d 1701                          cp  r16, r17
-00028e f451                          brne CTS_CLEAR_IF_NEEDED
-                                 
-00028f 9100 0116                     lds r16, alarm_latched
-000291 2300                          tst r16
-000292 f4b1                          brne CTS_END
-                                 
-000293 e001                          ldi r16, 1
-000294 9300 0115                     sts alarm_ringing, r16
-000296 9300 0116                     sts alarm_latched, r16
-000298 c010                          rjmp CTS_END
-                                 
-                                 CTS_CLEAR_IF_NEEDED:
-000299 9100 0100                     lds r16, hour
-00029b 9110 0105                     lds r17, alarm_hour
-00029d 1701                          cp  r16, r17
-00029e f439                          brne CTS_CLEAR_LATCH
-                                 
-00029f 9100 0101                     lds r16, minute
-0002a1 9110 0106                     lds r17, alarm_min
-0002a3 1701                          cp  r16, r17
-0002a4 f409                          brne CTS_CLEAR_LATCH
-                                 
-0002a5 c003                          rjmp CTS_END
-                                 
-                                 CTS_CLEAR_LATCH:
-0002a6 2700                          clr r16
-0002a7 9300 0116                     sts alarm_latched, r16
-                                 
-                                 CTS_END:
-0002a9 911f                          pop r17
-0002aa 910f                          pop r16
-0002ab 9508                          ret
-                                 
-                                 ;========================================================
-                                 ; Incrementar campo activo
-                                 ;========================================================
-                                 INCREMENT_ACTIVE_FIELD:
-0002ac 930f                          push r16
-0002ad 931f                          push r17
-0002ae 932f                          push r18
-                                 
-0002af 9100 0108                     lds r16, edit_mode
-                                 
-0002b1 3001                          cpi r16, MODE_SET_HOUR
-0002b2 f449                          brne IAF_CHK_MIN
-0002b3 9110 0100                     lds r17, hour
-0002b5 9513                          inc r17
-0002b6 3118                          cpi r17, 24
-0002b7 f008                          brlo IAF_STORE_HOUR
-0002b8 2711                          clr r17
-                                 IAF_STORE_HOUR:
-0002b9 9310 0100                     sts hour, r17
-0002bb c043                          rjmp IAF_END
-                                 
-                                 IAF_CHK_MIN:
-0002bc 3002                          cpi r16, MODE_SET_MIN
-0002bd f461                          brne IAF_CHK_DAY
-0002be 9110 0101                     lds r17, minute
+00001c c061                          rjmp ISR_TICK_MS
+                                 
+                                 ; tabla de patrones para display de 7 segmentos
+                                 ; el bit 6 corresponde al segmento A y el bit 0 al segmento G
+                                 TABLA_SEG:
+00001d 307e
+00001e 796d
+00001f 5b33
+000020 705f
+000021 7b7f
+000022 0000                          .db 0b1111110, 0b0110000, 0b1101101, 0b1111001, 0b0110011, 0b1011011, 0b1011111, 0b1110000, 0b1111111, 0b1111011, 0b0000000, 0b0000000
+                                 
+                                 ; rutina de inicializacion del sistema
+                                 INICIO:
+000023 e008                          ldi tmp0, high(RAMEND)
+000024 bf0e                          out SPH, tmp0
+000025 ef0f                          ldi tmp0, low(RAMEND)
+000026 bf0d                          out SPL, tmp0
+000027 2411                          clr r1
+                                 
+                                     ; hora inicial al encender
+000028 e00c                          ldi tmp0, 12
+000029 9300 0100                     sts horas, tmp0
+00002b 2700                          clr tmp0
+00002c 9300 0101                     sts minutos, tmp0
+00002e 9300 0102                     sts segundos, tmp0
+                                 
+                                     ; fecha inicial al encender
+000030 e001                          ldi tmp0, 1
+000031 9300 0103                     sts dia, tmp0
+000033 9300 0104                     sts mes, tmp0
+                                 
+                                     ; alarma predeterminada a las seis de la manana
+000035 e006                          ldi tmp0, 6
+000036 9300 0105                     sts alar_hora, tmp0
+000038 2700                          clr tmp0
+000039 9300 0106                     sts alar_min, tmp0
+                                 
+                                     ; poner en cero todas las variables de control
+00003b 2700                          clr tmp0
+00003c 9300 0107                     sts vista_actual, tmp0
+00003e 9300 0108                     sts modo_edicion, tmp0
+000040 9300 0109                     sts flag_parpadeo, tmp0
+000042 9300 010a                     sts cnt_ms_l, tmp0
+000044 9300 010b                     sts cnt_ms_h, tmp0
+000046 9300 010c                     sts cnt_500_l, tmp0
+000048 9300 010d                     sts cnt_500_h, tmp0
+00004a 9300 010e                     sts indice_mux, tmp0
+00004c 9300 0113                     sts bloqueos, tmp0
+00004e 9300 0114                     sts eventos, tmp0
+000050 9300 0115                     sts alarma_sonando, tmp0
+000052 9300 0116                     sts alarma_usada, tmp0
+000054 9300 0117                     sts puntos_on, tmp0
+000056 9300 0118                     sts led_alarma, tmp0
+000058 9300 010f                     sts seg_d0, tmp0
+00005a 9300 0110                     sts seg_d1, tmp0
+00005c 9300 0111                     sts seg_d2, tmp0
+00005e 9300 0112                     sts seg_d3, tmp0
+                                 
+                                     ; PB0 a PB5 como salidas para los segmentos y el LED de dos puntos
+000060 e30f                          ldi tmp0, 0b00111111
+000061 b904                          out DDRB, tmp0
+                                 
+                                     ; PD2 a PD7 como salidas para seleccion de digito y segmentos F G
+000062 ef0c                          ldi tmp0, 0b11111100
+000063 b90a                          out DDRD, tmp0
+000064 2700                          clr tmp0
+000065 b90b                          out PORTD, tmp0
+                                 
+                                     ; PC0 a PC3 entradas para botones PC4 salida LED PC5 salida buzzer
+000066 e300                          ldi tmp0, 0b00110000
+000067 b907                          out DDRC, tmp0
+                                 
+                                     ; activar resistencias de pull up internas en los pines de botones
+000068 e00f                          ldi tmp0, 0b00001111
+000069 b908                          out PORTC, tmp0
+                                 
+                                     ; habilitar interrupcion por cambio de pin solo en el grupo de PORTC
+00006a e002                          ldi tmp0, (1<<PCIE1)
+00006b 9300 0068                     sts PCICR, tmp0
+                                 
+                                     ; seleccionar solo los pines PC0 a PC3 dentro del grupo PORTC
+00006d e00f                          ldi tmp0, (1<<PCINT8)|(1<<PCINT9)|(1<<PCINT10)|(1<<PCINT11)
+00006e 9300 006c                     sts PCMSK1, tmp0
+                                 
+                                     ; configurar Timer0 en modo CTC con interrupcion cada un milisegundo
+000070 e002                          ldi tmp0, (1<<WGM01)
+000071 bd04                          out TCCR0A, tmp0
+000072 e003                          ldi tmp0, (1<<CS01)|(1<<CS00)
+000073 bd05                          out TCCR0B, tmp0
+000074 ef09                          ldi tmp0, 249
+000075 bd07                          out OCR0A, tmp0
+000076 e002                          ldi tmp0, (1<<OCIE0A)
+000077 9300 006e                     sts TIMSK0, tmp0
+                                 
+000079 9478                          sei
+                                 
+                                 CICLO_PRINCIPAL:
+00007a d07c                          rcall PROCESAR_BOTONES
+00007b d0ec                          rcall ACTUALIZAR_SALIDAS
+00007c d10b                          rcall CONSTRUIR_BUFFER
+00007d cffc                          rjmp CICLO_PRINCIPAL
+                                 
+                                 
+                                 ; interrupcion del Timer0 que se ejecuta cada milisegundo
+                                 ISR_TICK_MS:
+00007e 930f                          push r16
+00007f b70f                          in   r16, SREG
+000080 930f                          push r16
+000081 931f                          push r17
+000082 932f                          push r18
+000083 933f                          push r19
+000084 934f                          push r20
+000085 938f                          push r24
+000086 939f                          push r25
+000087 93ef                          push r30
+000088 93ff                          push r31
+                                 
+                                     ; contar hasta 500 milisegundos para controlar el parpadeo
+000089 9180 010c                     lds r24, cnt_500_l
+00008b 9190 010d                     lds r25, cnt_500_h
+00008d 9601                          adiw r24, 1
+00008e 9380 010c                     sts cnt_500_l, r24
+000090 9390 010d                     sts cnt_500_h, r25
+                                 
+000092 ef04                          ldi r16, low(500)
+000093 e011                          ldi r17, high(500)
+000094 1780                          cp  r24, r16
+000095 0791                          cpc r25, r17
+000096 f459                          brne TICK_SALTAR_500
+                                 
+                                     ; al llegar a 500 ms resetear el contador e invertir el flag de parpadeo
+000097 2700                          clr r16
+000098 9300 010c                     sts cnt_500_l, r16
+00009a 9300 010d                     sts cnt_500_h, r16
+00009c 9100 0109                     lds r16, flag_parpadeo
+00009e e011                          ldi r17, 1
+00009f 2701                          eor r16, r17
+0000a0 9300 0109                     sts flag_parpadeo, r16
+                                 
+                                 TICK_SALTAR_500:
+                                     ; contar hasta 1000 milisegundos para el tick de segundos
+0000a2 9180 010a                     lds r24, cnt_ms_l
+0000a4 9190 010b                     lds r25, cnt_ms_h
+0000a6 9601                          adiw r24, 1
+0000a7 9380 010a                     sts cnt_ms_l, r24
+0000a9 9390 010b                     sts cnt_ms_h, r25
+                                 
+0000ab ee08                          ldi r16, low(1000)
+0000ac e013                          ldi r17, high(1000)
+0000ad 1780                          cp  r24, r16
+0000ae 0791                          cpc r25, r17
+0000af f431                          brne TICK_SALTAR_1S
+                                 
+                                     ; al completar el segundo resetear y avanzar el reloj
+0000b0 2700                          clr r16
+0000b1 9300 010a                     sts cnt_ms_l, r16
+0000b3 9300 010b                     sts cnt_ms_h, r16
+0000b5 d18a                          rcall AVANZAR_SEGUNDO
+                                 
+                                 TICK_SALTAR_1S:
+0000b6 d142                          rcall REFRESCAR_DISPLAY
+                                 
+0000b7 91ff                          pop r31
+0000b8 91ef                          pop r30
+0000b9 919f                          pop r25
+0000ba 918f                          pop r24
+0000bb 914f                          pop r20
+0000bc 913f                          pop r19
+0000bd 912f                          pop r18
+0000be 911f                          pop r17
+0000bf 910f                          pop r16
+0000c0 bf0f                          out SREG, r16
+0000c1 910f                          pop r16
+0000c2 9518                          reti
+                                 
+                                 
+                                 ; interrupcion que detecta cambios en los pines de botones PC0 a PC3
+                                 ISR_BOTONES:
+0000c3 930f                          push r16
+0000c4 b70f                          in   r16, SREG
+0000c5 930f                          push r16
+0000c6 931f                          push r17
+0000c7 932f                          push r18
+                                 
+                                     ; leer el estado actual de los pines de botones
+0000c8 b106                          in  r16, PINC
+0000c9 9110 0113                     lds r17, bloqueos
+0000cb 9120 0114                     lds r18, eventos
+                                 
+                                     ; verificar boton VER en PC0
+0000cd ff00                          sbrs r16, 0
+0000ce c005                          rjmp BTN0_PRESIONADO
+                                 BTN0_SOLTADO:
+0000cf ff10                          sbrs r17, BIT_BTN_VER
+0000d0 c004                          rjmp VER_PC1
+0000d1 7f1e                          cbr r17, (1<<BIT_BTN_VER)
+0000d2 6021                          sbr r18, (1<<BIT_BTN_VER)
+0000d3 c001                          rjmp VER_PC1
+                                 BTN0_PRESIONADO:
+0000d4 6011                          sbr r17, (1<<BIT_BTN_VER)
+                                 
+                                 VER_PC1:
+                                     ; verificar boton SUBIR en PC1
+0000d5 ff01                          sbrs r16, 1
+0000d6 c005                          rjmp BTN1_PRESIONADO
+                                 BTN1_SOLTADO:
+0000d7 ff11                          sbrs r17, BIT_BTN_SUB
+0000d8 c004                          rjmp VER_PC2
+0000d9 7f1d                          cbr r17, (1<<BIT_BTN_SUB)
+0000da 6022                          sbr r18, (1<<BIT_BTN_SUB)
+0000db c001                          rjmp VER_PC2
+                                 BTN1_PRESIONADO:
+0000dc 6012                          sbr r17, (1<<BIT_BTN_SUB)
+                                 
+                                 VER_PC2:
+                                     ; verificar boton BAJAR en PC2
+0000dd ff02                          sbrs r16, 2
+0000de c005                          rjmp BTN2_PRESIONADO
+                                 BTN2_SOLTADO:
+0000df ff12                          sbrs r17, BIT_BTN_BAJ
+0000e0 c004                          rjmp VER_PC3
+0000e1 7f1b                          cbr r17, (1<<BIT_BTN_BAJ)
+0000e2 6024                          sbr r18, (1<<BIT_BTN_BAJ)
+0000e3 c001                          rjmp VER_PC3
+                                 BTN2_PRESIONADO:
+0000e4 6014                          sbr r17, (1<<BIT_BTN_BAJ)
+                                 
+                                 VER_PC3:
+                                     ; verificar boton MODO en PC3
+0000e5 ff03                          sbrs r16, 3
+0000e6 c005                          rjmp BTN3_PRESIONADO
+                                 BTN3_SOLTADO:
+0000e7 ff13                          sbrs r17, BIT_BTN_MOD
+0000e8 c004                          rjmp FIN_ISR_BTN
+0000e9 7f17                          cbr r17, (1<<BIT_BTN_MOD)
+0000ea 6028                          sbr r18, (1<<BIT_BTN_MOD)
+0000eb c001                          rjmp FIN_ISR_BTN
+                                 BTN3_PRESIONADO:
+0000ec 6018                          sbr r17, (1<<BIT_BTN_MOD)
+                                 
+                                 FIN_ISR_BTN:
+0000ed 9310 0113                     sts bloqueos, r17
+0000ef 9320 0114                     sts eventos, r18
+                                 
+0000f1 912f                          pop r18
+0000f2 911f                          pop r17
+0000f3 910f                          pop r16
+0000f4 bf0f                          out SREG, r16
+0000f5 910f                          pop r16
+0000f6 9518                          reti
+                                 
+                                 
+                                 ; lee los eventos pendientes y ejecuta la accion correspondiente
+                                 PROCESAR_BOTONES:
+0000f7 930f                          push r16
+0000f8 931f                          push r17
+                                 
+0000f9 9100 0114                     lds r16, eventos
+0000fb 2300                          tst r16
+0000fc f109                          breq PB_SALIR
+                                 
+                                     ; el boton MODO tiene prioridad sobre los demas
+0000fd ff03                          sbrs r16, BIT_BTN_MOD
+0000fe c005                          rjmp PB_VER_VISTA
+0000ff 7f07                          cbr r16, (1<<BIT_BTN_MOD)
+000100 9300 0114                     sts eventos, r16
+000102 d01e                          rcall ACCION_MODO
+000103 c01a                          rjmp PB_SALIR
+                                 
+                                 PB_VER_VISTA:
+000104 9100 0114                     lds r16, eventos
+000106 ff00                          sbrs r16, BIT_BTN_VER
+000107 c005                          rjmp PB_VER_SUBIR
+000108 7f0e                          cbr r16, (1<<BIT_BTN_VER)
+000109 9300 0114                     sts eventos, r16
+00010b d04d                          rcall ACCION_VISTA
+00010c c011                          rjmp PB_SALIR
+                                 
+                                 PB_VER_SUBIR:
+00010d 9100 0114                     lds r16, eventos
+00010f ff01                          sbrs r16, BIT_BTN_SUB
+000110 c005                          rjmp PB_VER_BAJAR
+000111 7f0d                          cbr r16, (1<<BIT_BTN_SUB)
+000112 9300 0114                     sts eventos, r16
+000114 d17c                          rcall INCREMENTAR_CAMPO
+000115 c008                          rjmp PB_SALIR
+                                 
+                                 PB_VER_BAJAR:
+000116 9100 0114                     lds r16, eventos
+000118 ff02                          sbrs r16, BIT_BTN_BAJ
+000119 c004                          rjmp PB_SALIR
+00011a 7f0b                          cbr r16, (1<<BIT_BTN_BAJ)
+00011b 9300 0114                     sts eventos, r16
+00011d d1ca                          rcall DECREMENTAR_CAMPO
+                                 
+                                 PB_SALIR:
+00011e 911f                          pop r17
+00011f 910f                          pop r16
+000120 9508                          ret
+                                 
+                                 
+                                 ; maneja la pulsacion del boton MODO
+                                 ACCION_MODO:
+000121 930f                          push r16
+000122 931f                          push r17
+                                 
+                                     ; si la alarma esta sonando este boton la silencia
+000123 9100 0115                     lds r16, alarma_sonando
+000125 2300                          tst r16
+000126 f021                          breq AM_AVANZAR_MODO
+000127 2700                          clr r16
+000128 9300 0115                     sts alarma_sonando, r16
+00012a c02b                          rjmp AM_FIN
+                                 
+                                 AM_AVANZAR_MODO:
+                                     ; avanzar al siguiente modo de edicion con vuelta al inicio en 7
+00012b 9100 0108                     lds r16, modo_edicion
+00012d 9503                          inc r16
+00012e 3007                          cpi r16, 7
+00012f f008                          brlo AM_GUARDAR
+000130 2700                          clr r16
+                                 
+                                 AM_GUARDAR:
+000131 9300 0108                     sts modo_edicion, r16
+                                 
+                                     ; forzar la vista correspondiente al modo recien activado
+000133 3001                          cpi r16, MODO_HORA
+000134 f421                          brne AM_C1
+000135 e010                          ldi r17, VISTA_HORA
+000136 9310 0107                     sts vista_actual, r17
+000138 c01d                          rjmp AM_FIN
+                                 
+                                 AM_C1:
+000139 3002                          cpi r16, MODO_MINUTO
+00013a f421                          brne AM_C2
+00013b e010                          ldi r17, VISTA_HORA
+00013c 9310 0107                     sts vista_actual, r17
+00013e c017                          rjmp AM_FIN
+                                 
+                                 AM_C2:
+00013f 3003                          cpi r16, MODO_DIA
+000140 f421                          brne AM_C3
+000141 e011                          ldi r17, VISTA_FECHA
+000142 9310 0107                     sts vista_actual, r17
+000144 c011                          rjmp AM_FIN
+                                 
+                                 AM_C3:
+000145 3004                          cpi r16, MODO_MES
+000146 f421                          brne AM_C4
+000147 e011                          ldi r17, VISTA_FECHA
+000148 9310 0107                     sts vista_actual, r17
+00014a c00b                          rjmp AM_FIN
+                                 
+                                 AM_C4:
+00014b 3005                          cpi r16, MODO_ALARM_H
+00014c f421                          brne AM_C5
+00014d e012                          ldi r17, VISTA_ALARMA
+00014e 9310 0107                     sts vista_actual, r17
+000150 c005                          rjmp AM_FIN
+                                 
+                                 AM_C5:
+000151 3006                          cpi r16, MODO_ALARM_M
+000152 f419                          brne AM_FIN
+000153 e012                          ldi r17, VISTA_ALARMA
+000154 9310 0107                     sts vista_actual, r17
+                                 
+                                 AM_FIN:
+000156 911f                          pop r17
+000157 910f                          pop r16
+000158 9508                          ret
+                                 
+                                 
+                                 ; maneja la pulsacion del boton VER cambiando la vista activa
+                                 ACCION_VISTA:
+000159 930f                          push r16
+                                 
+                                     ; la vista solo cambia cuando no hay ningun campo en edicion
+00015a 9100 0108                     lds r16, modo_edicion
+00015c 2300                          tst r16
+00015d f441                          brne AV_FIN
+                                 
+00015e 9100 0107                     lds r16, vista_actual
+000160 9503                          inc r16
+000161 3003                          cpi r16, 3
+000162 f008                          brlo AV_GUARDAR
+000163 2700                          clr r16
+                                 
+                                 AV_GUARDAR:
+000164 9300 0107                     sts vista_actual, r16
+                                 
+                                 AV_FIN:
+000166 910f                          pop r16
+000167 9508                          ret
+                                 
+                                 
+                                 ; actualiza el estado del LED de dos puntos y del LED indicador de alarma
+                                 ACTUALIZAR_SALIDAS:
+000168 930f                          push r16
+000169 931f                          push r17
+                                 
+                                     ; en vista fecha los dos puntos permanecen fijos encendidos
+00016a 9100 0107                     lds r16, vista_actual
+00016c 3001                          cpi r16, VISTA_FECHA
+00016d f421                          brne AS_NO_FECHA
+00016e e011                          ldi r17, 1
+00016f 9310 0117                     sts puntos_on, r17
+000171 c004                          rjmp AS_LED_ALARMA
+                                 
+                                 AS_NO_FECHA:
+                                     ; en otras vistas los dos puntos parpadean siguiendo el flag de parpadeo
+000172 9110 0109                     lds r17, flag_parpadeo
+000174 9310 0117                     sts puntos_on, r17
+                                 
+                                 AS_LED_ALARMA:
+                                     ; el LED indicador se enciende al ver o editar la alarma
+000176 2711                          clr r17
+000177 9100 0107                     lds r16, vista_actual
+000179 3002                          cpi r16, VISTA_ALARMA
+00017a f039                          breq AS_LED_ON
+00017b 9100 0108                     lds r16, modo_edicion
+00017d 3005                          cpi r16, MODO_ALARM_H
+00017e f019                          breq AS_LED_ON
+00017f 3006                          cpi r16, MODO_ALARM_M
+000180 f009                          breq AS_LED_ON
+000181 c001                          rjmp AS_GUARDAR_LED
+                                 
+                                 AS_LED_ON:
+000182 e011                          ldi r17, 1
+                                 
+                                 AS_GUARDAR_LED:
+000183 9310 0118                     sts led_alarma, r17
+                                 
+000185 911f                          pop r17
+000186 910f                          pop r16
+000187 9508                          ret
+                                 
+                                 
+                                 ; arma el contenido del buffer de display segun la vista y el modo activos
+                                 CONSTRUIR_BUFFER:
+000188 930f                          push r16
+000189 931f                          push r17
+00018a 932f                          push r18
+00018b 933f                          push r19
+00018c 934f                          push r20
+00018d 935f                          push r21
+00018e 938f                          push r24
+00018f 939f                          push r25
+000190 93ef                          push r30
+000191 93ff                          push r31
+                                 
+                                     ; seleccionar los dos valores a mostrar segun la vista activa
+000192 9100 0107                     lds r16, vista_actual
+000194 3000                          cpi r16, VISTA_HORA
+000195 f429                          brne CB_VER_FECHA
+000196 9100 0100                     lds r16, horas
+000198 9110 0101                     lds r17, minutos
+00019a c00d                          rjmp CB_SEPARAR
+                                 
+                                 CB_VER_FECHA:
+00019b 9120 0107                     lds r18, vista_actual
+00019d 3021                          cpi r18, VISTA_FECHA
+00019e f429                          brne CB_CARGAR_ALARMA
+00019f 9100 0103                     lds r16, dia
+0001a1 9110 0104                     lds r17, mes
+0001a3 c004                          rjmp CB_SEPARAR
+                                 
+                                 CB_CARGAR_ALARMA:
+0001a4 9100 0105                     lds r16, alar_hora
+0001a6 9110 0106                     lds r17, alar_min
+                                 
+                                 CB_SEPARAR:
+                                     ; separar el valor izquierdo en decenas y unidades
+0001a8 2f80                          mov r24, r16
+0001a9 d039                          rcall SEPARAR_DECIMAL
+0001aa 2f28                          mov r18, r24
+0001ab 2f39                          mov r19, r25
+                                 
+                                     ; separar el valor derecho en decenas y unidades
+0001ac 2f81                          mov r24, r17
+0001ad d035                          rcall SEPARAR_DECIMAL
+0001ae 2f48                          mov r20, r24
+0001af 2f59                          mov r21, r25
+                                 
+                                     ; cuando el flag de parpadeo esta en cero blanquear el campo en edicion
+0001b0 9100 0109                     lds r16, flag_parpadeo
+0001b2 2300                          tst r16
+0001b3 f4a1                          brne CB_CONVERTIR
+                                 
+0001b4 9100 0108                     lds r16, modo_edicion
+0001b6 3001                          cpi r16, MODO_HORA
+0001b7 f059                          breq CB_BLANQUEAR_IZQ
+0001b8 3003                          cpi r16, MODO_DIA
+0001b9 f049                          breq CB_BLANQUEAR_IZQ
+0001ba 3005                          cpi r16, MODO_ALARM_H
+0001bb f039                          breq CB_BLANQUEAR_IZQ
+0001bc 3002                          cpi r16, MODO_MINUTO
+0001bd f041                          breq CB_BLANQUEAR_DER
+0001be 3004                          cpi r16, MODO_MES
+0001bf f031                          breq CB_BLANQUEAR_DER
+0001c0 3006                          cpi r16, MODO_ALARM_M
+0001c1 f021                          breq CB_BLANQUEAR_DER
+0001c2 c005                          rjmp CB_CONVERTIR
+                                 
+                                 CB_BLANQUEAR_IZQ:
+0001c3 e02a                          ldi r18, COD_VACIO
+0001c4 e03a                          ldi r19, COD_VACIO
+0001c5 c002                          rjmp CB_CONVERTIR
+                                 
+                                 CB_BLANQUEAR_DER:
+0001c6 e04a                          ldi r20, COD_VACIO
+0001c7 e05a                          ldi r21, COD_VACIO
+                                 
+                                 CB_CONVERTIR:
+                                     ; convertir cada digito a su patron de segmentos y guardarlo en el buffer
+0001c8 2f82                          mov r24, r18
+0001c9 d025                          rcall DIGITO_A_SEG
+0001ca 9380 010f                     sts seg_d0, r24
+                                 
+0001cc 2f83                          mov r24, r19
+0001cd d021                          rcall DIGITO_A_SEG
+0001ce 9380 0110                     sts seg_d1, r24
+                                 
+0001d0 2f84                          mov r24, r20
+0001d1 d01d                          rcall DIGITO_A_SEG
+0001d2 9380 0111                     sts seg_d2, r24
+                                 
+0001d4 2f85                          mov r24, r21
+0001d5 d019                          rcall DIGITO_A_SEG
+0001d6 9380 0112                     sts seg_d3, r24
+                                 
+0001d8 91ff                          pop r31
+0001d9 91ef                          pop r30
+0001da 919f                          pop r25
+0001db 918f                          pop r24
+0001dc 915f                          pop r21
+0001dd 914f                          pop r20
+0001de 913f                          pop r19
+0001df 912f                          pop r18
+0001e0 911f                          pop r17
+0001e1 910f                          pop r16
+0001e2 9508                          ret
+                                 
+                                 
+                                 ; separa un numero de dos cifras en su decena y su unidad
+                                 ; recibe el valor en r24 y devuelve decenas en r24 y unidades en r25
+                                 SEPARAR_DECIMAL:
+0001e3 930f                          push r16
+0001e4 2700                          clr r16
+0001e5 2799                          clr r25
+                                 
+                                 SD_BUCLE:
+0001e6 308a                          cpi r24, 10
+0001e7 f018                          brlo SD_FIN
+0001e8 508a                          subi r24, 10
+0001e9 9503                          inc r16
+0001ea cffb                          rjmp SD_BUCLE
+                                 
+                                 SD_FIN:
+0001eb 2f98                          mov r25, r24
+0001ec 2f80                          mov r24, r16
+0001ed 910f                          pop r16
+0001ee 9508                          ret
+                                 
+                                 
+                                 ; consulta la tabla en flash y devuelve el patron de segmentos para el digito dado
+                                 ; recibe el indice en r24 y devuelve el patron en r24
+                                 DIGITO_A_SEG:
+0001ef 93ff                          push ZH
+0001f0 93ef                          push ZL
+0001f1 e0f0                          ldi ZH, high(TABLA_SEG<<1)
+0001f2 e3ea                          ldi ZL, low(TABLA_SEG<<1)
+0001f3 0fe8                          add ZL, r24
+0001f4 1df1                          adc ZH, r1
+0001f5 9184                          lpm r24, Z
+0001f6 91ef                          pop ZL
+0001f7 91ff                          pop ZH
+0001f8 9508                          ret
+                                 
+                                 
+                                 ; enciende un digito del display por vez ciclando entre los cuatro disponibles
+                                 REFRESCAR_DISPLAY:
+0001f9 930f                          push r16
+0001fa 931f                          push r17
+0001fb 932f                          push r18
+0001fc 933f                          push r19
+0001fd 934f                          push r20
+                                 
+0001fe 9100 010e                     lds r16, indice_mux
+                                 
+000200 3000                          cpi r16, 0
+000201 f421                          brne RD_CHK1
+000202 9110 010f                     lds r17, seg_d0
+000204 e220                          ldi r18, (1<<PD5)
+000205 c00f                          rjmp RD_SALIDA
+                                 
+                                 RD_CHK1:
+000206 3001                          cpi r16, 1
+000207 f421                          brne RD_CHK2
+000208 9110 0110                     lds r17, seg_d1
+00020a e120                          ldi r18, (1<<PD4)
+00020b c009                          rjmp RD_SALIDA
+                                 
+                                 RD_CHK2:
+00020c 3002                          cpi r16, 2
+00020d f421                          brne RD_CHK3
+00020e 9110 0111                     lds r17, seg_d2
+000210 e028                          ldi r18, (1<<PD3)
+000211 c003                          rjmp RD_SALIDA
+                                 
+                                 RD_CHK3:
+000212 9110 0112                     lds r17, seg_d3
+000214 e024                          ldi r18, (1<<PD2)
+                                 
+                                 RD_SALIDA:
+                                     ; escribir segmentos A a E en PORTB y el LED de dos puntos en PB5
+000215 2f31                          mov r19, r17
+000216 9536                          lsr r19
+000217 9536                          lsr r19
+000218 713f                          andi r19, 0b00011111
+                                 
+000219 9140 0117                     lds r20, puntos_on
+00021b 2344                          tst r20
+00021c f009                          breq RD_SIN_PUNTOS
+00021d 6230                          ori r19, (1<<PB5)
+                                 
+                                 RD_SIN_PUNTOS:
+00021e b935                          out PORTB, r19
+                                 
+                                     ; escribir segmentos F y G en PORTD junto con la linea de seleccion del digito
+00021f 2733                          clr r19
+000220 fd11                          sbrc r17, 1
+000221 6830                          ori r19, (1<<PD7)
+000222 fd10                          sbrc r17, 0
+000223 6430                          ori r19, (1<<PD6)
+000224 2b32                          or  r19, r18
+000225 b93b                          out PORTD, r19
+                                 
+                                     ; escribir en PORTC manteniendo los pull ups y activando LED y buzzer si corresponde
+000226 e03f                          ldi r19, 0b00001111
+                                 
+000227 9140 0118                     lds r20, led_alarma
+000229 2344                          tst r20
+00022a f009                          breq RD_SIN_LED
+00022b 6130                          ori r19, (1<<PC4)
+                                 
+                                 RD_SIN_LED:
+00022c 9140 0115                     lds r20, alarma_sonando
+00022e 2344                          tst r20
+00022f f009                          breq RD_SIN_BUZZER
+000230 6230                          ori r19, (1<<PC5)
+                                 
+                                 RD_SIN_BUZZER:
+000231 b938                          out PORTC, r19
+                                 
+                                     ; avanzar al siguiente digito y volver a cero al llegar a cuatro
+000232 9100 010e                     lds r16, indice_mux
+000234 9503                          inc r16
+000235 3004                          cpi r16, 4
+000236 f008                          brlo RD_GUARDAR
+000237 2700                          clr r16
+                                 
+                                 RD_GUARDAR:
+000238 9300 010e                     sts indice_mux, r16
+                                 
+00023a 914f                          pop r20
+00023b 913f                          pop r19
+00023c 912f                          pop r18
+00023d 911f                          pop r17
+00023e 910f                          pop r16
+00023f 9508                          ret
+                                 
+                                 
+                                 ; incrementa segundos minutos horas y delega el avance de fecha cuando corresponde
+                                 AVANZAR_SEGUNDO:
+000240 930f                          push r16
+000241 931f                          push r17
+                                 
+000242 9100 0102                     lds r16, segundos
+000244 9503                          inc r16
+000245 330c                          cpi r16, 60
+000246 f0d8                          brlo AVS_GUARDAR_SEG
+                                 
+000247 2700                          clr r16
+000248 9300 0102                     sts segundos, r16
+                                 
+00024a 9100 0101                     lds r16, minutos
+00024c 9503                          inc r16
+00024d 330c                          cpi r16, 60
+00024e f080                          brlo AVS_GUARDAR_MIN
+                                 
+00024f 2700                          clr r16
+000250 9300 0101                     sts minutos, r16
+                                 
+000252 9100 0100                     lds r16, horas
+000254 9503                          inc r16
+000255 3108                          cpi r16, 24
+000256 f028                          brlo AVS_GUARDAR_HORA
+                                 
+000257 2700                          clr r16
+000258 9300 0100                     sts horas, r16
+00025a d0e9                          rcall AVANZAR_DIA
+00025b c008                          rjmp AVS_VER_ALARMA
+                                 
+                                 AVS_GUARDAR_HORA:
+00025c 9300 0100                     sts horas, r16
+00025e c005                          rjmp AVS_VER_ALARMA
+                                 
+                                 AVS_GUARDAR_MIN:
+00025f 9300 0101                     sts minutos, r16
+000261 c002                          rjmp AVS_VER_ALARMA
+                                 
+                                 AVS_GUARDAR_SEG:
+000262 9300 0102                     sts segundos, r16
+                                 
+                                 AVS_VER_ALARMA:
+                                     ; la alarma solo se activa en el segundo cero del minuto coincidente
+000264 9100 0102                     lds r16, segundos
+000266 2300                          tst r16
+000267 f4b1                          brne AVS_LIMPIAR_SI_TOCA
+                                 
+000268 9100 0100                     lds r16, horas
+00026a 9110 0105                     lds r17, alar_hora
+00026c 1701                          cp  r16, r17
+00026d f481                          brne AVS_LIMPIAR_SI_TOCA
+                                 
+00026e 9100 0101                     lds r16, minutos
+000270 9110 0106                     lds r17, alar_min
+000272 1701                          cp  r16, r17
+000273 f451                          brne AVS_LIMPIAR_SI_TOCA
+                                 
+                                     ; verificar que no se haya activado ya en este mismo minuto
+000274 9100 0116                     lds r16, alarma_usada
+000276 2300                          tst r16
+000277 f4b1                          brne AVS_FIN
+                                 
+000278 e001                          ldi r16, 1
+000279 9300 0115                     sts alarma_sonando, r16
+00027b 9300 0116                     sts alarma_usada, r16
+00027d c010                          rjmp AVS_FIN
+                                 
+                                 AVS_LIMPIAR_SI_TOCA:
+                                     ; si la hora y el minuto ya no coinciden liberar el seguro para la proxima vez
+00027e 9100 0100                     lds r16, horas
+000280 9110 0105                     lds r17, alar_hora
+000282 1701                          cp  r16, r17
+000283 f439                          brne AVS_LIBERAR_SEGURO
+                                 
+000284 9100 0101                     lds r16, minutos
+000286 9110 0106                     lds r17, alar_min
+000288 1701                          cp  r16, r17
+000289 f409                          brne AVS_LIBERAR_SEGURO
+                                 
+00028a c003                          rjmp AVS_FIN
+                                 
+                                 AVS_LIBERAR_SEGURO:
+00028b 2700                          clr r16
+00028c 9300 0116                     sts alarma_usada, r16
+                                 
+                                 AVS_FIN:
+00028e 911f                          pop r17
+00028f 910f                          pop r16
+000290 9508                          ret
+                                 
+                                 
+                                 ; incrementa el campo que esta siendo editado segun el modo activo
+                                 INCREMENTAR_CAMPO:
+000291 930f                          push r16
+000292 931f                          push r17
+000293 932f                          push r18
+                                 
+000294 9100 0108                     lds r16, modo_edicion
+                                 
+000296 3001                          cpi r16, MODO_HORA
+000297 f449                          brne IC_MIN
+000298 9110 0100                     lds r17, horas
+00029a 9513                          inc r17
+00029b 3118                          cpi r17, 24
+00029c f008                          brlo IC_GUARDAR_HORA
+00029d 2711                          clr r17
+                                 IC_GUARDAR_HORA:
+00029e 9310 0100                     sts horas, r17
+0002a0 c043                          rjmp IC_FIN
+                                 
+                                 IC_MIN:
+0002a1 3002                          cpi r16, MODO_MINUTO
+0002a2 f461                          brne IC_DIA
+0002a3 9110 0101                     lds r17, minutos
+0002a5 9513                          inc r17
+0002a6 331c                          cpi r17, 60
+0002a7 f008                          brlo IC_GUARDAR_MIN
+0002a8 2711                          clr r17
+                                 IC_GUARDAR_MIN:
+0002a9 9310 0101                     sts minutos, r17
+0002ab 2711                          clr r17
+0002ac 9310 0102                     sts segundos, r17
+0002ae c035                          rjmp IC_FIN
+                                 
+                                 IC_DIA:
+0002af 3003                          cpi r16, MODO_DIA
+0002b0 f459                          brne IC_MES
+0002b1 9110 0103                     lds r17, dia
+0002b3 9513                          inc r17
+0002b4 d0ab                          rcall MAX_DIAS_MES
+0002b5 1712                          cp r17, r18
+0002b6 f010                          brlo IC_GUARDAR_DIA
+0002b7 f009                          breq IC_GUARDAR_DIA
+0002b8 e011                          ldi r17, 1
+                                 IC_GUARDAR_DIA:
+0002b9 9310 0103                     sts dia, r17
+0002bb c028                          rjmp IC_FIN
+                                 
+                                 IC_MES:
+0002bc 3004                          cpi r16, MODO_MES
+0002bd f489                          brne IC_ALAR_H
+0002be 9110 0104                     lds r17, mes
 0002c0 9513                          inc r17
-0002c1 331c                          cpi r17, 60
-0002c2 f008                          brlo IAF_STORE_MIN
-0002c3 2711                          clr r17
-                                 IAF_STORE_MIN:
-0002c4 9310 0101                     sts minute, r17
-0002c6 2711                          clr r17
-0002c7 9310 0102                     sts second, r17
-0002c9 c035                          rjmp IAF_END
+0002c1 301d                          cpi r17, 13
+0002c2 f008                          brlo IC_GUARDAR_MES
+0002c3 e011                          ldi r17, 1
+                                 IC_GUARDAR_MES:
+0002c4 9310 0104                     sts mes, r17
+0002c6 9110 0103                     lds r17, dia
+0002c8 d097                          rcall MAX_DIAS_MES
+0002c9 1712                          cp r17, r18
+0002ca f0c8                          brlo IC_FIN
+0002cb f0c1                          breq IC_FIN
+0002cc 9320 0103                     sts dia, r18
+0002ce c015                          rjmp IC_FIN
                                  
-                                 IAF_CHK_DAY:
-0002ca 3003                          cpi r16, MODE_SET_DAY
-0002cb f459                          brne IAF_CHK_MON
-0002cc 9110 0103                     lds r17, day
-0002ce 9513                          inc r17
-0002cf d0ab                          rcall GET_MONTH_MAXDAY
-0002d0 1712                          cp r17, r18
-0002d1 f010                          brlo IAF_STORE_DAY
-0002d2 f009                          breq IAF_STORE_DAY
-0002d3 e011                          ldi r17, 1
-                                 IAF_STORE_DAY:
-0002d4 9310 0103                     sts day, r17
-0002d6 c028                          rjmp IAF_END
+                                 IC_ALAR_H:
+0002cf 3005                          cpi r16, MODO_ALARM_H
+0002d0 f449                          brne IC_ALAR_M
+0002d1 9110 0105                     lds r17, alar_hora
+0002d3 9513                          inc r17
+0002d4 3118                          cpi r17, 24
+0002d5 f008                          brlo IC_GUARDAR_AH
+0002d6 2711                          clr r17
+                                 IC_GUARDAR_AH:
+0002d7 9310 0105                     sts alar_hora, r17
+0002d9 c00a                          rjmp IC_FIN
                                  
-                                 IAF_CHK_MON:
-0002d7 3004                          cpi r16, MODE_SET_MON
-0002d8 f489                          brne IAF_CHK_AH
-0002d9 9110 0104                     lds r17, month
-0002db 9513                          inc r17
-0002dc 301d                          cpi r17, 13
-0002dd f008                          brlo IAF_STORE_MON
-0002de e011                          ldi r17, 1
-                                 IAF_STORE_MON:
-0002df 9310 0104                     sts month, r17
-0002e1 9110 0103                     lds r17, day
-0002e3 d097                          rcall GET_MONTH_MAXDAY
-0002e4 1712                          cp r17, r18
-0002e5 f0c8                          brlo IAF_END
-0002e6 f0c1                          breq IAF_END
-0002e7 9320 0103                     sts day, r18
-0002e9 c015                          rjmp IAF_END
+                                 IC_ALAR_M:
+0002da 3006                          cpi r16, MODO_ALARM_M
+0002db f441                          brne IC_FIN
+0002dc 9110 0106                     lds r17, alar_min
+0002de 9513                          inc r17
+0002df 331c                          cpi r17, 60
+0002e0 f008                          brlo IC_GUARDAR_AM
+0002e1 2711                          clr r17
+                                 IC_GUARDAR_AM:
+0002e2 9310 0106                     sts alar_min, r17
                                  
-                                 IAF_CHK_AH:
-0002ea 3005                          cpi r16, MODE_SET_AH
-0002eb f449                          brne IAF_CHK_AM
-0002ec 9110 0105                     lds r17, alarm_hour
-0002ee 9513                          inc r17
-0002ef 3118                          cpi r17, 24
-0002f0 f008                          brlo IAF_STORE_AH
-0002f1 2711                          clr r17
-                                 IAF_STORE_AH:
-0002f2 9310 0105                     sts alarm_hour, r17
-0002f4 c00a                          rjmp IAF_END
+                                 IC_FIN:
+0002e4 912f                          pop r18
+0002e5 911f                          pop r17
+0002e6 910f                          pop r16
+0002e7 9508                          ret
                                  
-                                 IAF_CHK_AM:
-0002f5 3006                          cpi r16, MODE_SET_AM
-0002f6 f441                          brne IAF_END
-0002f7 9110 0106                     lds r17, alarm_min
-0002f9 9513                          inc r17
-0002fa 331c                          cpi r17, 60
-0002fb f008                          brlo IAF_STORE_AM
-0002fc 2711                          clr r17
-                                 IAF_STORE_AM:
-0002fd 9310 0106                     sts alarm_min, r17
                                  
-                                 IAF_END:
-0002ff 912f                          pop r18
-000300 911f                          pop r17
-000301 910f                          pop r16
-000302 9508                          ret
+                                 ; decrementa el campo que esta siendo editado segun el modo activo
+                                 DECREMENTAR_CAMPO:
+0002e8 930f                          push r16
+0002e9 931f                          push r17
+0002ea 932f                          push r18
                                  
-                                 ;========================================================
-                                 ; Decrementar campo activo
-                                 ;========================================================
-                                 DECREMENT_ACTIVE_FIELD:
-000303 930f                          push r16
-000304 931f                          push r17
-000305 932f                          push r18
+0002eb 9100 0108                     lds r16, modo_edicion
                                  
-000306 9100 0108                     lds r16, edit_mode
+0002ed 3001                          cpi r16, MODO_HORA
+0002ee f451                          brne DC_MIN
+0002ef 9110 0100                     lds r17, horas
+0002f1 2311                          tst r17
+0002f2 f411                          brne DC_DEC_HORA
+0002f3 e117                          ldi r17, 23
+0002f4 c001                          rjmp DC_GUARDAR_HORA
+                                 DC_DEC_HORA:
+0002f5 951a                          dec r17
+                                 DC_GUARDAR_HORA:
+0002f6 9310 0100                     sts horas, r17
+0002f8 c047                          rjmp DC_FIN
                                  
-000308 3001                          cpi r16, MODE_SET_HOUR
-000309 f451                          brne DAF_CHK_MIN
-00030a 9110 0100                     lds r17, hour
-00030c 2311                          tst r17
-00030d f411                          brne DAF_DEC_HOUR
-00030e e117                          ldi r17, 23
-00030f c001                          rjmp DAF_STORE_HOUR
-                                 DAF_DEC_HOUR:
-000310 951a                          dec r17
-                                 DAF_STORE_HOUR:
-000311 9310 0100                     sts hour, r17
-000313 c047                          rjmp DAF_END
+                                 DC_MIN:
+0002f9 3002                          cpi r16, MODO_MINUTO
+0002fa f469                          brne DC_DIA
+0002fb 9110 0101                     lds r17, minutos
+0002fd 2311                          tst r17
+0002fe f411                          brne DC_DEC_MIN
+0002ff e31b                          ldi r17, 59
+000300 c001                          rjmp DC_GUARDAR_MIN
+                                 DC_DEC_MIN:
+000301 951a                          dec r17
+                                 DC_GUARDAR_MIN:
+000302 9310 0101                     sts minutos, r17
+000304 2711                          clr r17
+000305 9310 0102                     sts segundos, r17
+000307 c038                          rjmp DC_FIN
                                  
-                                 DAF_CHK_MIN:
-000314 3002                          cpi r16, MODE_SET_MIN
-000315 f469                          brne DAF_CHK_DAY
-000316 9110 0101                     lds r17, minute
-000318 2311                          tst r17
-000319 f411                          brne DAF_DEC_MIN
-00031a e31b                          ldi r17, 59
-00031b c001                          rjmp DAF_STORE_MIN
-                                 DAF_DEC_MIN:
-00031c 951a                          dec r17
-                                 DAF_STORE_MIN:
-00031d 9310 0101                     sts minute, r17
-00031f 2711                          clr r17
-000320 9310 0102                     sts second, r17
-000322 c038                          rjmp DAF_END
+                                 DC_DIA:
+000308 3003                          cpi r16, MODO_DIA
+000309 f459                          brne DC_MES
+00030a 9110 0103                     lds r17, dia
+00030c 3011                          cpi r17, 1
+00030d f419                          brne DC_DEC_DIA
+00030e d051                          rcall MAX_DIAS_MES
+00030f 2f12                          mov r17, r18
+000310 c001                          rjmp DC_GUARDAR_DIA
+                                 DC_DEC_DIA:
+000311 951a                          dec r17
+                                 DC_GUARDAR_DIA:
+000312 9310 0103                     sts dia, r17
+000314 c02b                          rjmp DC_FIN
                                  
-                                 DAF_CHK_DAY:
-000323 3003                          cpi r16, MODE_SET_DAY
-000324 f459                          brne DAF_CHK_MON
-000325 9110 0103                     lds r17, day
-000327 3011                          cpi r17, 1
-000328 f419                          brne DAF_DEC_DAY
-000329 d051                          rcall GET_MONTH_MAXDAY
-00032a 2f12                          mov r17, r18
-00032b c001                          rjmp DAF_STORE_DAY
-                                 DAF_DEC_DAY:
-00032c 951a                          dec r17
-                                 DAF_STORE_DAY:
-00032d 9310 0103                     sts day, r17
-00032f c02b                          rjmp DAF_END
+                                 DC_MES:
+000315 3004                          cpi r16, MODO_MES
+000316 f491                          brne DC_ALAR_H
+000317 9110 0104                     lds r17, mes
+000319 3011                          cpi r17, 1
+00031a f411                          brne DC_DEC_MES
+00031b e01c                          ldi r17, 12
+00031c c001                          rjmp DC_GUARDAR_MES
+                                 DC_DEC_MES:
+00031d 951a                          dec r17
+                                 DC_GUARDAR_MES:
+00031e 9310 0104                     sts mes, r17
+000320 9110 0103                     lds r17, dia
+000322 d03d                          rcall MAX_DIAS_MES
+000323 1712                          cp r17, r18
+000324 f0d8                          brlo DC_FIN
+000325 f0d1                          breq DC_FIN
+000326 9320 0103                     sts dia, r18
+000328 c017                          rjmp DC_FIN
                                  
-                                 DAF_CHK_MON:
-000330 3004                          cpi r16, MODE_SET_MON
-000331 f491                          brne DAF_CHK_AH
-000332 9110 0104                     lds r17, month
-000334 3011                          cpi r17, 1
-000335 f411                          brne DAF_DEC_MON
-000336 e01c                          ldi r17, 12
-000337 c001                          rjmp DAF_STORE_MON
-                                 DAF_DEC_MON:
-000338 951a                          dec r17
-                                 DAF_STORE_MON:
-000339 9310 0104                     sts month, r17
-00033b 9110 0103                     lds r17, day
-00033d d03d                          rcall GET_MONTH_MAXDAY
-00033e 1712                          cp r17, r18
-00033f f0d8                          brlo DAF_END
-000340 f0d1                          breq DAF_END
-000341 9320 0103                     sts day, r18
-000343 c017                          rjmp DAF_END
+                                 DC_ALAR_H:
+000329 3005                          cpi r16, MODO_ALARM_H
+00032a f451                          brne DC_ALAR_M
+00032b 9110 0105                     lds r17, alar_hora
+00032d 2311                          tst r17
+00032e f411                          brne DC_DEC_AH
+00032f e117                          ldi r17, 23
+000330 c001                          rjmp DC_GUARDAR_AH
+                                 DC_DEC_AH:
+000331 951a                          dec r17
+                                 DC_GUARDAR_AH:
+000332 9310 0105                     sts alar_hora, r17
+000334 c00b                          rjmp DC_FIN
                                  
-                                 DAF_CHK_AH:
-000344 3005                          cpi r16, MODE_SET_AH
-000345 f451                          brne DAF_CHK_AM
-000346 9110 0105                     lds r17, alarm_hour
-000348 2311                          tst r17
-000349 f411                          brne DAF_DEC_AH
-00034a e117                          ldi r17, 23
-00034b c001                          rjmp DAF_STORE_AH
-                                 DAF_DEC_AH:
-00034c 951a                          dec r17
-                                 DAF_STORE_AH:
-00034d 9310 0105                     sts alarm_hour, r17
-00034f c00b                          rjmp DAF_END
+                                 DC_ALAR_M:
+000335 3006                          cpi r16, MODO_ALARM_M
+000336 f449                          brne DC_FIN
+000337 9110 0106                     lds r17, alar_min
+000339 2311                          tst r17
+00033a f411                          brne DC_DEC_AM
+00033b e31b                          ldi r17, 59
+00033c c001                          rjmp DC_GUARDAR_AM
+                                 DC_DEC_AM:
+00033d 951a                          dec r17
+                                 DC_GUARDAR_AM:
+00033e 9310 0106                     sts alar_min, r17
                                  
-                                 DAF_CHK_AM:
-000350 3006                          cpi r16, MODE_SET_AM
-000351 f449                          brne DAF_END
-000352 9110 0106                     lds r17, alarm_min
-000354 2311                          tst r17
-000355 f411                          brne DAF_DEC_AM
-000356 e31b                          ldi r17, 59
-000357 c001                          rjmp DAF_STORE_AM
-                                 DAF_DEC_AM:
-000358 951a                          dec r17
-                                 DAF_STORE_AM:
-000359 9310 0106                     sts alarm_min, r17
+                                 DC_FIN:
+000340 912f                          pop r18
+000341 911f                          pop r17
+000342 910f                          pop r16
+000343 9508                          ret
                                  
-                                 DAF_END:
-00035b 912f                          pop r18
-00035c 911f                          pop r17
-00035d 910f                          pop r16
-00035e 9508                          ret
                                  
-                                 ;========================================================
-                                 ; Avance natural del día
-                                 ;========================================================
-                                 INCREMENT_DAY_ROLLOVER:
-00035f 930f                          push r16
-000360 931f                          push r17
-000361 932f                          push r18
+                                 ; avanza el dia del calendario al llegar a medianoche
+                                 AVANZAR_DIA:
+000344 930f                          push r16
+000345 931f                          push r17
+000346 932f                          push r18
                                  
-000362 9100 0103                     lds r16, day
-000364 9503                          inc r16
+000347 9100 0103                     lds r16, dia
+000349 9503                          inc r16
                                  
-000365 d015                          rcall GET_MONTH_MAXDAY
-000366 1702                          cp r16, r18
-000367 f068                          brlo IDR_STORE_DAY
-000368 f061                          breq IDR_STORE_DAY
+00034a d015                          rcall MAX_DIAS_MES
+00034b 1702                          cp r16, r18
+00034c f068                          brlo ADR_GUARDAR_DIA
+00034d f061                          breq ADR_GUARDAR_DIA
                                  
-000369 e001                          ldi r16, 1
-00036a 9300 0103                     sts day, r16
+                                     ; si se supero el maximo del mes pasar al dia uno del mes siguiente
+00034e e001                          ldi r16, 1
+00034f 9300 0103                     sts dia, r16
                                  
-00036c 9110 0104                     lds r17, month
-00036e 9513                          inc r17
-00036f 301d                          cpi r17, 13
-000370 f008                          brlo IDR_STORE_MONTH
-000371 e011                          ldi r17, 1
+000351 9110 0104                     lds r17, mes
+000353 9513                          inc r17
+000354 301d                          cpi r17, 13
+000355 f008                          brlo ADR_GUARDAR_MES
+000356 e011                          ldi r17, 1
                                  
-                                 IDR_STORE_MONTH:
-000372 9310 0104                     sts month, r17
-000374 c002                          rjmp IDR_END
+                                 ADR_GUARDAR_MES:
+000357 9310 0104                     sts mes, r17
+000359 c002                          rjmp ADR_FIN
                                  
-                                 IDR_STORE_DAY:
-000375 9300 0103                     sts day, r16
+                                 ADR_GUARDAR_DIA:
+00035a 9300 0103                     sts dia, r16
                                  
-                                 IDR_END:
-000377 912f                          pop r18
-000378 911f                          pop r17
-000379 910f                          pop r16
-00037a 9508                          ret
+                                 ADR_FIN:
+00035c 912f                          pop r18
+00035d 911f                          pop r17
+00035e 910f                          pop r16
+00035f 9508                          ret
                                  
-                                 ;========================================================
-                                 ; r18 = máximo día del mes actual
-                                 ;========================================================
-                                 GET_MONTH_MAXDAY:
-00037b 930f                          push r16
                                  
-00037c 9100 0104                     lds r16, month
-00037e 3002                          cpi r16, 2
-00037f f051                          breq GMD_FEB
+                                 ; devuelve en r18 la cantidad de dias del mes almacenado en la variable mes
+                                 ; febrero siempre se trata con 28 dias sin considerar años bisiestos
+                                 MAX_DIAS_MES:
+000360 930f                          push r16
                                  
-000380 3004                          cpi r16, 4
-000381 f051                          breq GMD_30
-000382 3006                          cpi r16, 6
-000383 f041                          breq GMD_30
-000384 3009                          cpi r16, 9
-000385 f031                          breq GMD_30
-000386 300b                          cpi r16, 11
-000387 f021                          breq GMD_30
+000361 9100 0104                     lds r16, mes
                                  
-000388 e12f                          ldi r18, 31
-000389 c003                          rjmp GMD_END
+000363 3002                          cpi r16, 2
+000364 f051                          breq MDM_FEB
                                  
-                                 GMD_FEB:
-00038a e12c                          ldi r18, 28
-00038b c001                          rjmp GMD_END
+000365 3004                          cpi r16, 4
+000366 f051                          breq MDM_30
+000367 3006                          cpi r16, 6
+000368 f041                          breq MDM_30
+000369 3009                          cpi r16, 9
+00036a f031                          breq MDM_30
+00036b 300b                          cpi r16, 11
+00036c f021                          breq MDM_30
                                  
-                                 GMD_30:
-00038c e12e                          ldi r18, 30
+00036d e12f                          ldi r18, 31
+00036e c003                          rjmp MDM_FIN
                                  
-                                 GMD_END:
-00038d 910f                          pop r16
+                                 MDM_FEB:
+00036f e12c                          ldi r18, 28
+000370 c001                          rjmp MDM_FIN
+                                 
+                                 MDM_30:
+000371 e12e                          ldi r18, 30
+                                 
+                                 MDM_FIN:
+000372 910f                          pop r16
 
 
 RESOURCE USE INFORMATION
@@ -2237,10 +2170,10 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   2 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16: 244 r17: 153 r18:  40 r19:  24 r20:  15 
-r21:   7 r22:   2 r23:   2 r24:  30 r25:  14 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16: 245 r17: 153 r18:  40 r19:  24 r20:  15 
+r21:   5 r22:   0 r23:   0 r24:  30 r25:  14 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   8 r31:   8 
-Registers used: 14 out of 35 (40.0%)
+Registers used: 12 out of 35 (34.3%)
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   1 add   :   1 adiw  :   2 and   :   0 
@@ -2249,14 +2182,14 @@ brcc  :   0 brcs  :   0 break :   0 breq  :  23 brge  :   0 brhc  :   0
 brhs  :   0 brid  :   0 brie  :   0 brlo  :  17 brlt  :   0 brmi  :   0 
 brne  :  40 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   8 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  24 cls   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  25 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :  10 cpc   :   2 
 cpi   :  53 cpse  :   0 dec   :   6 eor   :   1 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   3 inc   :  15 jmp   :   0 
 ld    :   0 ldd   :   0 ldi   :  52 lds   :  70 lpm   :   2 lsl   :   0 
 lsr   :   2 mov   :  14 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   1 ori   :   5 out   :  15 pop   :  54 
-push  :  54 rcall :  21 ret   :  13 reti  :  25 rjmp  :  63 rol   :   0 
+neg   :   0 nop   :   0 or    :   1 ori   :   5 out   :  15 pop   :  51 
+push  :  51 rcall :  21 ret   :  13 reti  :   2 rjmp  :  63 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   8 sbrc  :   2 sbrs  :  12 sec   :   0 seh   :   0 
 sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
@@ -2267,7 +2200,7 @@ Instructions used: 37 out of 113 (32.7%)
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00071e   1760     12   1772   32768   5.4%
+[.cseg] 0x000000 0x0006e8   1704     12   1716   32768   5.2%
 [.dseg] 0x000100 0x000119      0     25     25    2048   1.2%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
